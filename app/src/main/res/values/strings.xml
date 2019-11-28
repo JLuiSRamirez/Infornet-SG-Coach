@@ -15,4 +15,15 @@
     <string name="nuevacontra">Nueva contraseña</string>
     <string name="confpassword">Confirmar contraseña</string>
     <string name="ingresarpass">Registrar constraseña</string>
+
+    <string name="perfil">Perfil</string>
+    <string name="rutinas">Rutinas</string>
+    <string name="alimentacion">Alimentación</string>
+    <string name="miembros">Miembros</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+
 </resources>
