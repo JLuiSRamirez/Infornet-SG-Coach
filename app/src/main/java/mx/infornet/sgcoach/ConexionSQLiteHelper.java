@@ -15,7 +15,9 @@ public class ConexionSQLiteHelper extends SQLiteOpenHelper {
     private static final String KEY_EMAIL = "email";
     private static final String KEY_HORARIOS = "horarios";
     private static final String KEY_ID_GIMNASIO = "gimnasio";
+    private static final String KEY_TOKEN_TYPE = "token_type";
     private static final String KEY_TOKEN = "token";
+
 
     public ConexionSQLiteHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -33,6 +35,7 @@ public class ConexionSQLiteHelper extends SQLiteOpenHelper {
                         + KEY_EMAIL + " TEXT, "
                         + KEY_HORARIOS + " TEXT, "
                         + KEY_ID_GIMNASIO + " INTEGER, "
+                        + KEY_TOKEN_TYPE + " TEXT, "
                         + KEY_TOKEN + " TEXT)";
 
         db.execSQL(CREATE_COACHES_TABLE);

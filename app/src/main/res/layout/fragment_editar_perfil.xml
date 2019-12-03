@@ -1,81 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_bright">
+    android:background="@android:color/holo_blue_dark"
+    android:orientation="vertical"
+    android:paddingLeft="40dp"
+    android:paddingTop="20dp"
+    android:paddingRight="40dp">
 
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
+        android:layout_height="100dp"
         android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
+        android:paddingBottom="10dp"
         app:srcCompat="@mipmap/icon" />
 
-    <TextView
-        android:id="@+id/nombre_coach"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/LoginTextInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="19dp"
-        android:textSize="22dp"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        android:paddingRight="5dp"
-        android:paddingLeft="5dp"
-        android:hint="Nombre_coach" />
+        android:hint="Nombre"
+        android:textColorHint="@android:color/white"
+        app:hintAnimationEnabled="false"
+        android:layout_marginBottom="10dp">
 
-    <TextView
-        android:id="@+id/gimnasio"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/nombre_coach"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="13dp"
-        android:hint="Gimnasio"
-        android:textAlignment="center"
-         />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_nombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_perfil_24dp"
+            android:drawablePadding="15dp"
+            android:inputType="textPersonName"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/horario"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/LoginTextInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/gimnasio"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="14dp"
-        android:hint="Horario"
-        android:textAlignment="center"/>
-
-    <TextView
-        android:id="@+id/biografia"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/horario"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="15dp"
         android:hint="Biografia"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:textAlignment="inherit"
-        android:textSize="20dp" />
 
-    <ImageButton
-        android:id="@+id/btn_edit"
-        android:layout_width="wrap_content"
+        android:textColorHint="@android:color/white"
+        app:hintAnimationEnabled="false"
+        android:layout_marginBottom="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_biografia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_biografia_black_24dp"
+            android:drawablePadding="15dp"
+            android:singleLine="false"
+            android:gravity="start"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/LoginTextInputLayoutStyle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/biografia"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="9dp"
-        app:srcCompat="@drawable/ic_edit_24dp" />
+        android:hint="Correo"
+        android:textColorHint="@android:color/white"
+        app:hintAnimationEnabled="false"
+        android:layout_marginBottom="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_correo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_contact_mail_black_24dp"
+            android:drawablePadding="15dp"
+            android:inputType="textEmailAddress"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"  />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/LoginTextInputLayoutStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Horario"
+        android:textColorHint="@android:color/white"
+        app:hintAnimationEnabled="false"
+        android:layout_marginBottom="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_horario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_horario_black_24dp"
+            android:drawablePadding="15dp"
+            android:inputType="text"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_actualizar_perfil"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="150dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:text="Guardar cambios"
+        android:textAllCaps="false"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp"
+        app:backgroundTint="@color/colorPrimary"
+        app:cornerRadius="10dp"/>
+
+    <ProgressBar
+        android:id="@+id/prog_bar_edit_perfil"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/colorPrimary"
+        android:max="100"/>
 
 
-</RelativeLayout>
+</LinearLayout>

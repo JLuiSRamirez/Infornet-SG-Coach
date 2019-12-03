@@ -128,6 +128,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 String status = jsonObject.getString("status");
                                 String postToken = jsonObject.getString("access_token");
+                                String tokenType = jsonObject.getString("token_type");
                                 JSONObject usuario = jsonObject.getJSONObject("usuario");
 
                                 Log.d("ESTATUS", status);
@@ -148,13 +149,14 @@ public class LoginActivity extends AppCompatActivity {
                                     SQLiteDatabase db = con.getWritableDatabase();
                                     ContentValues values = new ContentValues();
 
+                                    values.put("idCoach", postId);
+                                    values.put("nombre", postNombre);
                                     values.put("email", postEmail);
                                     values.put("biografia", postBiografia);
                                     values.put("horarios", postHorarios);
-                                    values.put("nombre", postNombre);
-                                    values.put("token", postToken);
-                                    values.put("idCoach", postId);
                                     values.put("gimnasio", postGimnasio);
+                                    values.put("token", postToken);
+                                    values.put("token_type",tokenType);
 
 
                                     db.insert("coaches", null, values);

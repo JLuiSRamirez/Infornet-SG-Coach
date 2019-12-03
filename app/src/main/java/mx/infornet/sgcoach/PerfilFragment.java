@@ -4,8 +4,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -17,14 +15,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+
 public class PerfilFragment extends Fragment {
 
     private View myView;
 
-    private String nombre, biografia, horario, gimnasio;
-    private TextView tv_nombre, tv_biografia, tv_horario, tv_gimnasio;
+    private String nombre, biografia, horario, correo, gimnasio;
+    private TextView tv_nombre, tv_biografia, tv_horario, tv_gimnasio, tv_correo;
     private Button btn_edit;
-    LayoutInflater layoutInflater;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,7 +38,7 @@ public class PerfilFragment extends Fragment {
         ConexionSQLiteHelper conn = new ConexionSQLiteHelper(getActivity(), "coaches", null, 3);
         SQLiteDatabase db = conn.getWritableDatabase();
 
-        btn_edit = myView.findViewById(R.id.btn_edit);
+        btn_edit = myView.findViewById(R.id.btn_editar);
 
         btn_edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,8 +59,10 @@ public class PerfilFragment extends Fragment {
             for(cursor.moveToFirst(); !cursor.isAfterLast();cursor.moveToNext()) {
                 nombre = cursor.getString(cursor.getColumnIndex("nombre"));
                 biografia = cursor.getString(cursor.getColumnIndex("biografia"));
+                correo = cursor.getString(cursor.getColumnIndex("email"));
                 horario = cursor.getString(cursor.getColumnIndex("horarios"));
                 gimnasio = cursor.getString(cursor.getColumnIndex("gimnasio"));
+
             }
 
         } catch (Exception e) {
@@ -75,11 +75,13 @@ public class PerfilFragment extends Fragment {
         tv_biografia = myView.findViewById(R.id.biografia);
         tv_gimnasio = myView.findViewById(R.id.gimnasio);
         tv_horario = myView.findViewById(R.id.horario);
+        tv_correo = myView.findViewById(R.id.correo);
 
         tv_nombre.setText(nombre);
         tv_biografia.setText(biografia);
-        tv_gimnasio.setText(gimnasio);
+        tv_gimnasio.setText("Gimnasio " +gimnasio);
         tv_horario.setText(horario);
+        tv_correo.setText(correo);
 
         return myView;
     }

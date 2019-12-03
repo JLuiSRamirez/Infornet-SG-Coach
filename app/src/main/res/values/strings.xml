@@ -25,5 +25,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
+    <string name="editar_perfil"><u>Editar</u></string>
+
 
 </resources>
