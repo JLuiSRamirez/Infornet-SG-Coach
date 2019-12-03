@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_dark"
+    android:background="@mipmap/fondologin"
     android:orientation="vertical"
     android:paddingLeft="40dp"
     android:paddingTop="20dp"
@@ -77,26 +77,6 @@
             android:inputType="textEmailAddress"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white"  />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/LoginTextInputLayoutStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Horario"
-        android:textColorHint="@android:color/white"
-        app:hintAnimationEnabled="false"
-        android:layout_marginBottom="10dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_horario"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_horario_black_24dp"
-            android:drawablePadding="15dp"
-            android:inputType="text"
-            android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

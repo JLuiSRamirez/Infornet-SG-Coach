@@ -42,7 +42,7 @@ public class EditarPerfilFragment extends Fragment {
     private ProgressBar progressBar;
 
     private String nombre, biografia, correo, horario, id_coach, token, token_type;
-    private TextInputEditText tv_nombre, tv_biografia, tv_horario, tv_correo;
+    private TextInputEditText tv_nombre, tv_biografia, tv_correo;
     private Button btn_actualizar;
 
     private RequestQueue queue;
@@ -91,11 +91,9 @@ public class EditarPerfilFragment extends Fragment {
         tv_nombre = myView.findViewById(R.id.edit_nombre);
         tv_biografia = myView.findViewById(R.id.edit_biografia);
         tv_correo = myView.findViewById(R.id.edit_correo);
-        tv_horario = myView.findViewById(R.id.edit_horario);
 
         tv_nombre.setText(nombre);
         tv_biografia.setText(biografia);
-        tv_horario.setText(horario);
         tv_correo.setText(correo);
 
         db.close();
@@ -109,7 +107,6 @@ public class EditarPerfilFragment extends Fragment {
                     final String nuevoNombre= tv_nombre.getText().toString();
                     final String nuevoBiografia = tv_biografia.getText().toString();
                     final String nuevoCorreo = tv_correo.getText().toString();
-                    final String nuevoHorario = tv_horario.getText().toString();
 
                     queue = Volley.newRequestQueue(getContext());
 
@@ -123,9 +120,6 @@ public class EditarPerfilFragment extends Fragment {
                     } else if (TextUtils.isEmpty(nuevoCorreo) || !validarEmail(nuevoCorreo)) {
                         tv_correo.setError("Ingresa un correo valido");
                         tv_correo.requestFocus();
-                    } else if (TextUtils.isEmpty(nuevoHorario)) {
-                        tv_horario.setError("Ingresa un horario de entrada y salida");
-                        tv_horario.requestFocus();
                     } else {
 
                         progressBar.setVisibility(View.VISIBLE);
@@ -148,7 +142,6 @@ public class EditarPerfilFragment extends Fragment {
                                         values.put("nombre", nuevoNombre);
                                         values.put("biografia", nuevoBiografia);
                                         values.put("email", nuevoCorreo);
-                                        values.put("horarios", nuevoHorario);
 
                                         dbup.update("coaches", values, "idCoach=" + id_coach, null);
                                         dbup.close();
@@ -195,10 +188,6 @@ public class EditarPerfilFragment extends Fragment {
                                                     String errorBiografia = errors.getString("boigrafia");
                                                     tv_biografia.setError(errorBiografia);
                                                     tv_biografia.requestFocus();
-                                                } else if (errors.has("horarios")){
-                                                    String errorHorarios = errors.getString("horarios");
-                                                    tv_horario.setError(errorHorarios);
-                                                    tv_horario.requestFocus();
                                                 } else if (errors.has("email")){
                                                     String errorEmail = errors.getString("email");
                                                     tv_correo.setError(errorEmail);
@@ -207,7 +196,9 @@ public class EditarPerfilFragment extends Fragment {
                                             }
                                         }
                                     } catch (JSONException e) {
-                                        Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                                        e.printStackTrace();
+                                        String err = e.toString();
+                                        Toast.makeText(getContext(), "Error: " + err, Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
@@ -218,7 +209,6 @@ public class EditarPerfilFragment extends Fragment {
                                 params.put("nombre", nuevoNombre);
                                 params.put("biografia", nuevoBiografia);
                                 params.put("email", nuevoCorreo);
-                                params.put("horarios", nuevoHorario);
 
                                 return params;
                             }

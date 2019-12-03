@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView"
         android:layout_marginTop="10dp"
-        android:hint="Nombre_coach"
+        android:hint="Nombre"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:textAlignment="center"
@@ -76,11 +76,21 @@
         android:textSize="20dp" />
 
 
+    <ProgressBar
+        android:id="@+id/prog_bar_perfil"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:layout_below="@+id/biografia"
+        android:indeterminateTint="@color/colorPrimary"
+        android:max="100"/>
+
     <Button
         android:id="@+id/btn_editar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/biografia"
+        android:layout_below="@+id/prog_bar_perfil"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:text="Editar" />

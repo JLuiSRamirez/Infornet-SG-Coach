@@ -11,5 +11,7 @@ public class Config {
 
     public static final String EMAIL_RESET_URL = "https://smartgym.infornet.mx/api/coach/password/email";
 
+    public static final String PERFIL_URL = "https://smartgym.infornet.mx/api/coach/perfil";
+
     public static final String EDIT_PERFIL_URL = "https://smartgym.infornet.mx/api/coach/perfil";
 }
