@@ -5,10 +5,10 @@
     android:id="@+id/tv_correo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:paddingLeft="40dp"
-    android:paddingTop="20dp"
-    android:paddingRight="40dp">
+    android:background="@mipmap/fondologin"
+    android:paddingLeft="5dp"
+    android:paddingTop="5dp"
+    android:paddingRight="5dp">
 
 
     <ImageView
@@ -27,11 +27,13 @@
         android:layout_below="@+id/imageView"
         android:layout_marginTop="10dp"
         android:hint="Nombre"
+        android:textColorHint="@android:color/white"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:textAlignment="center"
         android:textSize="24dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@android:color/white"/>
 
     <TextView
         android:id="@+id/correo"
@@ -40,6 +42,8 @@
         android:layout_below="@+id/nombre_coach"
         android:layout_marginTop="1dp"
         android:hint="Correo"
+        android:textColorHint="@android:color/white"
+        android:textColor="@android:color/white"
         android:textSize="14sp"
         android:textAlignment="center"/>
 
@@ -50,6 +54,8 @@
         android:layout_below="@+id/correo"
         android:layout_marginTop="1dp"
         android:hint="Gimnasio"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
         android:textSize="14sp"
         android:textAlignment="center" />
 
@@ -60,6 +66,8 @@
         android:layout_below="@+id/gimnasio"
         android:layout_marginTop="1dp"
         android:hint="Horario"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
         android:textSize="14sp"
         android:textAlignment="center" />
 
@@ -70,6 +78,8 @@
         android:layout_below="@+id/horario"
         android:layout_marginTop="15dp"
         android:hint="Biografia"
+        android:textColorHint="@android:color/white"
+        android:textColor="@android:color/white"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:textAlignment="inherit"

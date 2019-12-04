@@ -1,21 +1,30 @@
 package mx.infornet.sgcoach;
 
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.Menu;
+import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class MainActivity extends AppCompatActivity {
 
+    private RequestQueue queue;
+    private StringRequest request_logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +34,43 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
+        BottomAppBar bottomAppBar = findViewById(R.id.options);
+
+        bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.nav_exit:/*
+                        request_logout = new StringRequest(Request.Method.POST, Config.LOGOUT_URL, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Log.d("res_logout", response);
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.e("err_res_logout", error.toString());
+                            }
+                        });
+
+                        queue.add(request_logout);*/
+
+                        ConexionSQLiteHelper  connl = new ConexionSQLiteHelper(getApplicationContext(), "coaches", null, 3);
+                        SQLiteDatabase dbl = connl.getWritableDatabase();
+                        dbl.execSQL("DELETE FROM coaches");
+                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                        finish();
+                        break;
+                    case R.id.nav_info:
+                        Toast.makeText(MainActivity.this, "Presionaste el boton acerca", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.nav_problems:
+                        Toast.makeText(MainActivity.this, "Presionaste el boton reportar un problema", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                return false;
+            }
+        });
 
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -64,4 +110,5 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             };
+
 }

@@ -4,104 +4,201 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="@mipmap/fondologin"
     android:orientation="vertical"
-    android:paddingLeft="40dp"
-    android:paddingTop="20dp"
-    android:paddingRight="40dp">
+    android:paddingLeft="5dp"
+    android:paddingTop="5dp"
+    android:paddingRight="5dp">
 
-
-    <ImageView
-        android:id="@+id/imageView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
-        android:paddingBottom="10dp"
-        app:srcCompat="@mipmap/icon" />
+        android:layout_height="match_parent">
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/LoginTextInputLayoutStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nombre"
-        android:textColorHint="@android:color/white"
-        app:hintAnimationEnabled="false"
-        android:layout_marginBottom="10dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_nombre"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_perfil_24dp"
-            android:drawablePadding="15dp"
-            android:inputType="textPersonName"
-            android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:orientation="vertical">
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/LoginTextInputLayoutStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Biografia"
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_centerHorizontal="true"
+                    android:paddingBottom="10dp"
+                    app:srcCompat="@mipmap/icon" />
 
-        android:textColorHint="@android:color/white"
-        app:hintAnimationEnabled="false"
-        android:layout_marginBottom="10dp">
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/LoginTextInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nombre"
+                    android:textColorHint="@color/colorPrimary"
+                    app:hintAnimationEnabled="false"
+                    android:layout_marginBottom="10dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_biografia"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_biografia_black_24dp"
-            android:drawablePadding="15dp"
-            android:singleLine="false"
-            android:gravity="start"
-            android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white" />
-    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_nombre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_person_white_24dp"
+                        android:drawablePadding="15dp"
+                        android:inputType="textPersonName"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="@android:color/white" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/LoginTextInputLayoutStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Correo"
-        android:textColorHint="@android:color/white"
-        app:hintAnimationEnabled="false"
-        android:layout_marginBottom="10dp">
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/LoginTextInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Biografia"
+                    android:textColorHint="@color/colorPrimary"
+                    app:hintAnimationEnabled="false"
+                    android:layout_marginBottom="10dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_correo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_contact_mail_black_24dp"
-            android:drawablePadding="15dp"
-            android:inputType="textEmailAddress"
-            android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white"  />
-    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_biografia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_biografia_white_24dp"
+                        android:drawablePadding="15dp"
+                        android:singleLine="false"
+                        android:gravity="start"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="@android:color/white" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/btn_actualizar_perfil"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="150dp"
-        android:layout_height="80dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
-        android:text="Guardar cambios"
-        android:textAllCaps="false"
-        android:textColor="@color/colorAccent"
-        android:textSize="18sp"
-        app:backgroundTint="@color/colorPrimary"
-        app:cornerRadius="10dp"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/LoginTextInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Correo"
+                    android:textColorHint="@color/colorPrimary"
+                    app:hintAnimationEnabled="false"
+                    android:layout_marginBottom="10dp">
 
-    <ProgressBar
-        android:id="@+id/prog_bar_edit_perfil"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:indeterminateTint="@color/colorPrimary"
-        android:max="100"/>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_correo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_email_white_24dp"
+                        android:drawablePadding="15dp"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="@android:color/white"  />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ProgressBar
+                    android:id="@+id/prog_bar_edit_perfil"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/colorPrimary"
+                    android:max="100"/>
+
+                <Button
+                    android:id="@+id/btn_actualizar_perfil"
+                    style="@style/AppTheme.Button"
+                    android:layout_width="170dp"
+                    android:layout_height="55dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:padding="10dp"
+                    android:text="Guardar cambios"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="18sp"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:cornerRadius="10dp"/>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/LoginTextInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:hint="Contraseña actual"
+                    app:hintAnimationEnabled="false"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/colorPrimary">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/current_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@mipmap/passwhite"
+                        android:inputType="textPassword"
+                        android:drawablePadding="15dp"
+                        android:textColor="#FFF" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/LoginTextInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:hint="Nueva contraseña"
+                    app:hintAnimationEnabled="false"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/colorPrimary">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/new_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@mipmap/passwhite"
+                        android:inputType="textPassword"
+                        android:drawablePadding="15dp"
+                        android:textColor="#FFF" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/LoginTextInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:hint="Confirmar contraseña"
+                    app:hintAnimationEnabled="false"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/colorPrimary">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/confirm_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@mipmap/passwhite"
+                        android:inputType="textPassword"
+                        android:drawablePadding="15dp"
+                        android:textColor="#FFF" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ProgressBar
+                    android:id="@+id/prog_bar_edit_pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/colorPrimary"
+                    android:max="100"/>
+
+                <Button
+                    android:id="@+id/btn_edit_pass"
+                    style="@style/AppTheme.Button"
+                    android:layout_width="150dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:padding="5dp"
+                    android:text="Guardar"
+                    android:textAllCaps="false"
+                    android:textSize="18sp"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:cornerRadius="10dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
 
 
 </LinearLayout>
