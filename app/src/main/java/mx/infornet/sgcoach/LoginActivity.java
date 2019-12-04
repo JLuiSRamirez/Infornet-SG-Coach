@@ -144,6 +144,13 @@ public class LoginActivity extends AppCompatActivity {
                                     String postEmail = usuario.getString("email");
                                     String postHorarios = usuario.getString("horarios");
                                     String postGimnasio = usuario.getString("id_gimnasio");
+                                    //CUANDO BENITO REGRESE EL NOMBRE DEL GIMNASIO AGREGARLO ACA PARA GUARDARLO LOCALMENTE
+                                    //--
+                                    //--
+                                    //--
+                                    //--
+                                    //--
+
 
                                     ConexionSQLiteHelper con = new ConexionSQLiteHelper(getApplicationContext(), "coaches", null, 3);
                                     SQLiteDatabase db = con.getWritableDatabase();

@@ -1,8 +1,10 @@
 package mx.infornet.sgcoach;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +44,7 @@ public class PerfilFragment extends Fragment {
     private Button btn_edit;
 
     private RequestQueue queue;
-    private StringRequest request;
+    private StringRequest request, request_logout;
 
 
     @Override
@@ -63,7 +65,7 @@ public class PerfilFragment extends Fragment {
         ConexionSQLiteHelper conn = new ConexionSQLiteHelper(getActivity(), "coaches", null, 3);
         SQLiteDatabase db = conn.getWritableDatabase();
 
-        queue = Volley.newRequestQueue(getContext());
+        progressBar.setVisibility(View.VISIBLE);
 
         btn_edit = myView.findViewById(R.id.btn_editar);
 
@@ -89,6 +91,7 @@ public class PerfilFragment extends Fragment {
                 correo = cursor.getString(cursor.getColumnIndex("email"));
                 horario = cursor.getString(cursor.getColumnIndex("horarios"));
                 id_gimnasio = cursor.getString(cursor.getColumnIndex("gimnasio"));
+                //gimnasio = cursor.getString(cursor.getColumnIndex("nombre_gimnasio"));
                 token = cursor.getString(cursor.getColumnIndex("token"));
                 token_type = cursor.getString(cursor.getColumnIndex("token_type"));
 
@@ -99,74 +102,20 @@ public class PerfilFragment extends Fragment {
         }
 
         db.close();
-        progressBar.setVisibility(View.VISIBLE);
-        request = new StringRequest(Request.Method.GET, Config.PERFIL_URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                progressBar.setVisibility(View.GONE);
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    JSONObject gimInfo = jsonObject.getJSONObject("gimnasio");
-                    gimnasio = gimInfo.getString("nombre"); //guardarlo en la BD local??
-                   // Toast.makeText(getContext(), "Nombre del gimnasio obtenido " + gimnasio, Toast.LENGTH_SHORT).show();
-                    tv_nombre = myView.findViewById(R.id.nombre_coach);
-                    tv_biografia = myView.findViewById(R.id.biografia);
-                    tv_gimnasio = myView.findViewById(R.id.gimnasio);
-                    tv_horario = myView.findViewById(R.id.horario);
-                    tv_correo = myView.findViewById(R.id.correo);
 
-                    tv_nombre.setText(nombre);
-                    tv_biografia.setText(biografia);
-                    tv_gimnasio.setText(gimnasio);
-                    tv_horario.setText(horario);
-                    tv_correo.setText(correo);
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    String err = e.toString();
-                    Toast.makeText(getContext(), "Error: " + err, Toast.LENGTH_SHORT).show();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                progressBar.setVisibility(View.GONE);
-                Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
-                NetworkResponse networkResponse = error.networkResponse;
+        progressBar.setVisibility(View.GONE);
+        tv_nombre = myView.findViewById(R.id.nombre_coach);
+        tv_biografia = myView.findViewById(R.id.biografia);
+        tv_gimnasio = myView.findViewById(R.id.gimnasio);
+        tv_horario = myView.findViewById(R.id.horario);
+        tv_correo = myView.findViewById(R.id.correo);
 
-                if(networkResponse != null && networkResponse.data != null) {
-                    String jsonError = new String(networkResponse.data);
-                    try {
-                        JSONObject jsonObjectError = new JSONObject(jsonError);
-                        if (jsonObjectError.has("status")) {
-                            String status = jsonObjectError.getString("status");
-                            if (status.equals("Token is Expired")) {
-                                Toast.makeText(getContext(), "Caduco la sesion, vuelve a ingresar a la aplicación", Toast.LENGTH_SHORT).show();
-                                //eliminar todos los datos de la base de datos local para guardar los nuevos datos
-                                //PENDIENTE
-                                //---------
-                                //---------
-                                //...
-                                //---------
-                            }
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        String err = e.toString();
-                        Toast.makeText(getContext(), "Error: " + err, Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap();
-                headers.put("Authorization", token_type + " " + token);
-                return headers;
-            }
-        };
-
-        queue.add(request);
+        tv_nombre.setText(nombre);
+        tv_biografia.setText(biografia);
+        tv_gimnasio.setText(id_gimnasio);
+        tv_horario.setText(horario);
+        tv_correo.setText(correo);
 
         return myView;
     }

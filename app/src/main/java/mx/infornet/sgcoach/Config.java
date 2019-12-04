@@ -13,5 +13,9 @@ public class Config {
 
     public static final String PERFIL_URL = "https://smartgym.infornet.mx/api/coach/perfil";
 
+    public static final String EDIT_PASSWORD_URL = "https://smartgym.infornet.mx/api/coach/password/update";
+
     public static final String EDIT_PERFIL_URL = "https://smartgym.infornet.mx/api/coach/perfil";
+
+    public static final String LOGOUT_URL = "https://smartgym.infornet.mx/api/coach/logout";
 }
