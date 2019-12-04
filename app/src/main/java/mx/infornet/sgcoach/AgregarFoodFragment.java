@@ -1,0 +1,176 @@
+package mx.infornet.sgcoach;
+
+import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.android.material.textfield.TextInputEditText;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
+
+public class AgregarFoodFragment extends Fragment {
+
+    private View myView;
+    private TextInputEditText iet_nombre, iet_descripcion, iet_categoria;
+    private Button agregar;
+    private StringRequest request;
+    private RequestQueue queue;
+    private String token, token_type;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        myView = inflater.inflate(R.layout.fragment_agregar_food, container, false);
+
+        ConexionSQLiteHelper conn = new ConexionSQLiteHelper(getActivity(), "coaches", null, 3);
+        SQLiteDatabase db = conn.getWritableDatabase();
+
+        try {
+            String query = "SELECT * FROM coaches";
+
+            Cursor cursor = db.rawQuery(query, null);
+
+            for(cursor.moveToFirst(); !cursor.isAfterLast();cursor.moveToNext()) {
+                token = cursor.getString(cursor.getColumnIndex("token"));
+                token_type = cursor.getString(cursor.getColumnIndex("token_type"));
+            }
+
+        } catch (Exception e) {
+            Toast.makeText(getActivity(), "Error " + e.toString(), Toast.LENGTH_SHORT).show();
+        }
+
+        Log.d("token", token);
+
+        db.close();
+
+        queue = Volley.newRequestQueue(getContext());
+
+        iet_nombre = myView.findViewById(R.id.nombre_alim_add);
+        iet_descripcion = myView.findViewById(R.id.descripcion_alim_add);
+        iet_categoria = myView.findViewById(R.id.categoria_alim_add);
+
+        agregar = myView.findViewById(R.id.store_alim);
+
+        agregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String nombre = iet_nombre.getText().toString();
+                final String descripcion = iet_descripcion.getText().toString();
+                final String categoria = iet_categoria.getText().toString();
+
+                if (TextUtils.isEmpty(nombre)){
+                    iet_nombre.setError("Ingresa un nombre válido");
+                    iet_nombre.requestFocus();
+                } else if(TextUtils.isEmpty(descripcion)){
+                    iet_descripcion.setError("Ingresa una descripción");
+                    iet_descripcion.requestFocus();
+                } else if (TextUtils.isEmpty(categoria)){
+                    iet_categoria.setError("Ingresa alguna categoria");
+                    iet_categoria.requestFocus();
+                } else{
+
+                    request = new StringRequest(Request.Method.POST, Config.ADD_ALIM_URL, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+
+                                Log.d("RES_ADD_ALM", jsonObject.toString());
+
+                                if (jsonObject.has("message")){
+                                    String mensaje = jsonObject.getString("message");
+                                    if (mensaje.equals("Rutinas actualizadas")) {
+                                        Toast.makeText(getContext(), mensaje, Toast.LENGTH_LONG).show();
+
+                                        Fragment food = new FoodFragment();
+                                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                        transaction.replace(R.id.fragment_container, food);
+                                        transaction.addToBackStack(null);
+                                        transaction.commit();
+                                    }
+                                }
+                            }catch (JSONException e){
+                                Log.e("ERR_JSON", e.toString());
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                            NetworkResponse networkResponse = error.networkResponse;
+
+                            if(networkResponse != null && networkResponse.data != null){
+                                String jsonError = new String(networkResponse.data);
+
+                                try {
+                                    JSONObject jsonObjectError = new JSONObject(jsonError);
+                                    Log.e("error_logn", jsonObjectError.toString());
+                                } catch (JSONException e){
+                                    Log.e("ERR_RES", e.toString());
+                                }
+                            }
+
+                        }
+                    }){
+                        @Override
+                        public Map<String, String> getHeaders() throws AuthFailureError {
+                            HashMap<String, String> headers = new HashMap();
+                            headers.put("Authorization", token_type + " " + token);
+                            return headers;
+                        }
+
+                        @Override
+                        protected Map<String, String> getParams() {
+                            HashMap<String, String> hashMap = new HashMap<>();
+                            hashMap.put("nombre", nombre);
+                            hashMap.put("descripcion", descripcion);
+                            hashMap.put("categoria", categoria);
+                            return hashMap;
+                        }
+                    };
+
+                    queue.add(request);
+                }
+            }
+        });
+
+
+        return myView;
+    }
+
+}
