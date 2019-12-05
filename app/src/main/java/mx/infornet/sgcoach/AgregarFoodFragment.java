@@ -1,5 +1,6 @@
 package mx.infornet.sgcoach;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -29,6 +30,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -113,8 +115,11 @@ public class AgregarFoodFragment extends Fragment {
                                 Log.d("RES_ADD_ALM", jsonObject.toString());
 
                                 if (jsonObject.has("message")){
+
                                     String mensaje = jsonObject.getString("message");
-                                    if (mensaje.equals("Rutinas actualizadas")) {
+
+                                    if (mensaje.equals("Plan de alimentacion agregado")) {
+
                                         Toast.makeText(getContext(), mensaje, Toast.LENGTH_LONG).show();
 
                                         Fragment food = new FoodFragment();
@@ -140,6 +145,37 @@ public class AgregarFoodFragment extends Fragment {
                                 try {
                                     JSONObject jsonObjectError = new JSONObject(jsonError);
                                     Log.e("error_logn", jsonObjectError.toString());
+
+                                    if (jsonObjectError.has("message")){
+                                        String message = jsonObjectError.getString("message");
+
+
+                                        if (message.equals("The given data was invalid.")){
+
+                                            JSONObject errors = jsonObjectError.getJSONObject("errors");
+
+                                            if (errors.has("nombre")){
+
+                                                JSONArray err_pas = errors.getJSONArray("nombre");
+
+                                                StringBuilder sb_nom = new StringBuilder();
+
+                                                for (int i=0; i<err_pas.length(); i++){
+                                                    String valor = err_pas.getString(i);
+                                                    sb_nom.append(valor+"\n");
+                                                }
+
+                                                new AlertDialog.Builder(getContext())
+                                                        .setTitle("Error!")
+                                                        .setMessage(sb_nom)
+                                                        .setPositiveButton("Ok", null)
+                                                        .show();
+                                                iet_nombre.requestFocus();
+                                            }
+
+                                        }
+                                    }
+
                                 } catch (JSONException e){
                                     Log.e("ERR_RES", e.toString());
                                 }

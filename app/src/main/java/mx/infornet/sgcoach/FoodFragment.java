@@ -135,9 +135,9 @@ public class FoodFragment extends Fragment {
                         if (status.equals("Token is Expired")){
                             Toast.makeText(getContext(), status+". Favor de iniciar sesión nuevamente", Toast.LENGTH_LONG).show();
 
-                            ConexionSQLiteHelper  conn = new ConexionSQLiteHelper(getContext(), "usuarios", null, 3);
+                            ConexionSQLiteHelper  conn = new ConexionSQLiteHelper(getContext(), "coaches", null, 3);
                             SQLiteDatabase db = conn.getWritableDatabase();
-                            db.execSQL("DELETE FROM usuarios");
+                            db.execSQL("DELETE FROM coaches");
 
                             startActivity(new Intent(getContext(), LoginActivity.class));
                             getActivity().finish();
