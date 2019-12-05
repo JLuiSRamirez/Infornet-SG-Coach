@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -97,62 +99,76 @@ public class ShowAlimentacionActivity extends AppCompatActivity {
         btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                request = new StringRequest(Request.Method.DELETE, Config.DELETE_ALIM_URL+id, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
 
-                        try {
+                new AlertDialog.Builder(ShowAlimentacionActivity.this)
+                        .setTitle("Atención !")
+                        .setMessage("¿Estás seguro de eliminar este Plan de Alimentación?")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setCancelable(false)
+                        .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                request = new StringRequest(Request.Method.DELETE, Config.DELETE_ALIM_URL+id, new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
 
-                            JSONObject jsonObject = new JSONObject(response);
-                            Log.e("RESPONSE", jsonObject.toString());
+                                        try {
 
-                            if (jsonObject.has("status")) {
+                                            JSONObject jsonObject = new JSONObject(response);
+                                            Log.e("RESPONSE", jsonObject.toString());
 
-                                String status = jsonObject.getString("status");
-                                if (status.equals("Token is expired")) {
-                                    Toast.makeText(getApplicationContext(), "Token invalido. Favor de iniciar sesión nuevamente", Toast.LENGTH_LONG).show();
-                                }
-                            } else if(jsonObject.has("message")){
-                                String mensaje = jsonObject.getString("message");
+                                            if (jsonObject.has("status")) {
 
-                                Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
+                                                String status = jsonObject.getString("status");
+                                                if (status.equals("Token is expired")) {
+                                                    Toast.makeText(getApplicationContext(), "Token invalido. Favor de iniciar sesión nuevamente", Toast.LENGTH_LONG).show();
+                                                }
+                                            } else if(jsonObject.has("message")){
+                                                String mensaje = jsonObject.getString("message");
 
-                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                                finish();
+                                                Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
 
+                                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                                finish();
+
+                                            }
+
+                                        } catch (JSONException e){
+                                            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                                }, new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        Log.e("Error.Response", error.toString());
+                                        String json = null;
+                                        NetworkResponse response = error.networkResponse;
+                                        if(response != null && response.data != null){
+                                            switch(response.statusCode){
+                                                case 500:
+
+                                                    json = new String(response.data);
+                                                    System.out.println(json);
+                                                    break;
+                                            }
+                                            //Additional cases
+                                        }
+                                    }
+                                }){
+                                    @Override
+                                    public Map<String, String> getHeaders() throws AuthFailureError {
+                                        HashMap<String, String> headers = new HashMap();
+                                        headers.put("Authorization", token_type + " " + token);
+                                        return headers;
+                                    }
+                                };
+
+                                queue.add(request);
                             }
+                        })
+                        .setNeutralButton("Cancelar", null)
+                        .show();
 
-                        } catch (JSONException e){
-                            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("Error.Response", error.toString());
-                        String json = null;
-                        NetworkResponse response = error.networkResponse;
-                        if(response != null && response.data != null){
-                            switch(response.statusCode){
-                                case 500:
-
-                                    json = new String(response.data);
-                                    System.out.println(json);
-                                    break;
-                            }
-                            //Additional cases
-                        }
-                    }
-                }){
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        HashMap<String, String> headers = new HashMap();
-                        headers.put("Authorization", token_type + " " + token);
-                        return headers;
-                    }
-                };
-
-                queue.add(request);
             }
         });
 
