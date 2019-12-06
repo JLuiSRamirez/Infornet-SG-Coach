@@ -1,10 +1,8 @@
 package mx.infornet.sgcoach;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,20 +16,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkResponse;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class PerfilFragment extends Fragment {
 
@@ -91,8 +78,7 @@ public class PerfilFragment extends Fragment {
                 biografia = cursor.getString(cursor.getColumnIndex("biografia"));
                 correo = cursor.getString(cursor.getColumnIndex("email"));
                 horario = cursor.getString(cursor.getColumnIndex("horarios"));
-                id_gimnasio = cursor.getString(cursor.getColumnIndex("gimnasio"));
-                //gimnasio = cursor.getString(cursor.getColumnIndex("nombre_gimnasio"));
+                gimnasio = cursor.getString(cursor.getColumnIndex("nombre_gimnasio"));
                 token = cursor.getString(cursor.getColumnIndex("token"));
                 token_type = cursor.getString(cursor.getColumnIndex("token_type"));
 
@@ -114,7 +100,7 @@ public class PerfilFragment extends Fragment {
 
         tv_nombre.setText(nombre);
         tv_biografia.setText(biografia);
-        tv_gimnasio.setText(id_gimnasio);
+        tv_gimnasio.setText(gimnasio);
         tv_horario.setText(horario);
         tv_correo.setText(correo);
 

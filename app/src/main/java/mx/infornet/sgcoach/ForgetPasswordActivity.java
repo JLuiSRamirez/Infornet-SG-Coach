@@ -71,6 +71,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         btn_forget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btn_regresar.setVisibility(View.INVISIBLE);
 
                 String emailPattern = "^[a-zA-Z0-9\\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$";
 
@@ -80,6 +81,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                 if(TextUtils.isEmpty(email) || !email.matches(emailPattern)){
                     correo.setError("Ingresa un correo valido. Ej. example@mail.com");
                     correo.requestFocus();
+                    btn_regresar.setVisibility(View.VISIBLE);
                     return;
                 }else{
                     progressBar.setVisibility(View.VISIBLE);
@@ -88,6 +90,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(String response) {
                             progressBar.setVisibility(View.GONE);
+                            btn_regresar.setVisibility(View.VISIBLE);
 
                             try {
                                 JSONObject jsonObject = new JSONObject(response);
@@ -128,13 +131,19 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             progressBar.setVisibility(View.GONE);
-
-                            if(error.networkResponse.statusCode == 500){
-                                Toast.makeText(getApplicationContext(), "No existe una cuenta registrada con este correo", Toast.LENGTH_SHORT).show();
-                                correo.setText("");
-                                correo.requestFocus();
-                            }else {
-                                Toast.makeText(getApplicationContext(), "No se pudo establecer una conexion con el servidor. Comprueba tu conexion a internet", Toast.LENGTH_SHORT).show();
+                            btn_regresar.setVisibility(View.VISIBLE);
+                            try {
+                                if (error.networkResponse.statusCode == 500) {
+                                    Toast.makeText(getApplicationContext(), "No existe una cuenta registrada con este correo", Toast.LENGTH_SHORT).show();
+                                    correo.setText("");
+                                    correo.requestFocus();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "No se pudo establecer una conexion con el servidor. Comprueba tu conexion a internet", Toast.LENGTH_SHORT).show();
+                                }
+                            }catch (Exception e) {
+                                btn_regresar.setVisibility(View.VISIBLE);
+                                Toast.makeText(ForgetPasswordActivity.this, "Servicio no disponible por el momento, intentelo nuevamente más tarde", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(ForgetPasswordActivity.this, "Error: " + e.toString(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     }){

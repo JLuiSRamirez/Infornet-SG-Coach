@@ -3,6 +3,7 @@ package mx.infornet.sgcoach;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,15 +14,21 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
+
 public class MainActivity extends AppCompatActivity {
 
-
+    private StringRequest request;
+    private RequestQueue queue;
     TextView about;
 
     @Override
@@ -39,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.nav_exit:
-                        /*
-                        request_logout = new StringRequest(Request.Method.POST, Config.LOGOUT_URL, new Response.Listener<String>() {
+                        queue = Volley.newRequestQueue(MainActivity.this);
+                        request = new StringRequest(Request.Method.POST, Config.LOGOUT_URL, new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 Log.d("res_logout", response);
@@ -52,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
 
-                        queue.add(request_logout);*/
+                        queue.add(request);
 
                         ConexionSQLiteHelper  connl = new ConexionSQLiteHelper(getApplicationContext(), "coaches", null, 3);
                         SQLiteDatabase dbl = connl.getWritableDatabase();

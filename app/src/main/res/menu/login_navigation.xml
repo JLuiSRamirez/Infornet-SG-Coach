@@ -2,16 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/nav_exit"
-        android:icon="@drawable/ic_exit_black_24dp"
+        android:id="@+id/nav_about_us"
         android:iconTint="@android:color/black"
-        android:title="Salir" />
+        android:icon="@drawable/ic_contact_us_black_24dp"
+        android:title="Creado por" />
 
     <item
-        android:id="@+id/nav_info"
+        android:id="@+id/nav_contactanos"
         android:iconTint="@android:color/black"
-        android:icon="@drawable/ic_info_black_24dp"
-        android:title="Acerca" />
+        android:icon="@drawable/ic_contact_us_black_24dp"
+        android:title="Contáctanos" />
 
     <item
         android:id="@+id/nav_problems"

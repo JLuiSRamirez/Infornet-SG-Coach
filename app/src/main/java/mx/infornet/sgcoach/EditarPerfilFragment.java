@@ -87,7 +87,6 @@ public class EditarPerfilFragment extends Fragment {
                 nombre = cursor.getString(cursor.getColumnIndex("nombre"));
                 biografia = cursor.getString(cursor.getColumnIndex("biografia"));
                 correo = cursor.getString(cursor.getColumnIndex("email"));
-                horario = cursor.getString(cursor.getColumnIndex("horarios"));
                 token = cursor.getString(cursor.getColumnIndex("token"));
                 token_type = cursor.getString(cursor.getColumnIndex("token_type"));
             }

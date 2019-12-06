@@ -110,7 +110,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                                     JSONObject usuario = jsonObject.getJSONObject("usuario");
 
                                     if (status.equals("200")) {
-                                        //Log.d("JSONUSUARIO", usuario.toString());
+
                                         String mensaje = jsonObject.getString("message");
 
                                         String postId = usuario.getString("id");
@@ -118,7 +118,21 @@ public class ResetPasswordActivity extends AppCompatActivity {
                                         String postBiografia = usuario.getString("biografia");
                                         String postEmail = usuario.getString("email");
                                         String postHorarios = usuario.getString("horarios");
-                                        String postGimnasio = usuario.getString("id_gimnasio");
+                                       // String postGimnasio = usuario.getString("id_gimnasio"); //falta ver como se recibe el nombre del gym
+
+
+                                        //Log.d("JSONUSUARIO", usuario.toString());
+                                        //Borramos los datos actuales para actualizarlos con los nuevos despues
+                                        //--
+                                        //_-
+                                        //_-
+                                        //--
+                                        //--
+                                        //-pendiente
+                                        //--
+                                        //--
+                                        //--
+                                        //_-
 
                                         ConexionSQLiteHelper con = new ConexionSQLiteHelper(getApplicationContext(), "coaches", null, 3);
                                         SQLiteDatabase db = con.getWritableDatabase();
@@ -129,7 +143,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                                         values.put("biografia", postBiografia);
                                         values.put("email", postEmail);
                                         values.put("horarios", postHorarios);
-                                        values.put("gimnasio", postGimnasio);
+                                        //values.put("gimnasio", postGimnasio);
                                         values.put("token", postToken);
 
                                         db.insert("coaches", null, values);
