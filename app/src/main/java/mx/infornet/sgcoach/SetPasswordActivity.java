@@ -25,7 +25,6 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -170,32 +169,36 @@ public class SetPasswordActivity extends AppCompatActivity {
                             String jsonError = new String(networkResponse.data);
                             try {
                                 JSONObject jsonObjectError = new JSONObject(jsonError);
-                                String msg = jsonObjectError.getString("message");
 
-                                if (error.networkResponse.statusCode == 500  && !msg.equals("Ya se ha establecido una contraseña")) {
-                                    String errs = jsonObjectError.getString("errors");
-                                    errs = errs.replaceAll("password","");
-                                    String errors[] = errs.split(",");
-                                    for (int i = 0; i < errors.length; i++) {
-                                        errors[i] = errors[i].replaceAll("[^a-zA-Z\\d\\s\u00f1\u00D1\u00C1\u00E1\u00C9\u00E9\u00CD\u00ED\u00D3\u00F3\u00DA\u00FA]", "");
+                                if (jsonObjectError.has("message")){
+                                    String msg = jsonObjectError.getString("message");
 
-                                        Toast.makeText(getApplicationContext(), errors[i], Toast.LENGTH_SHORT).show();
+                                    if (error.networkResponse.statusCode == 500  && !msg.equals("Ya se ha establecido una contraseña")) {
+                                        String errs = jsonObjectError.getString("errors");
+                                        errs = errs.replaceAll("password","");
+                                        String errors[] = errs.split(",");
+                                        for (int i = 0; i < errors.length; i++) {
+                                            errors[i] = errors[i].replaceAll("[^a-zA-Z\\d\\s\u00f1\u00D1\u00C1\u00E1\u00C9\u00E9\u00CD\u00ED\u00D3\u00F3\u00DA\u00FA]", "");
+
+                                            Toast.makeText(getApplicationContext(), errors[i], Toast.LENGTH_SHORT).show();
+                                        }
+                                    }else {
+                                        String status = jsonObjectError.getString("status");
+                                        if (status.equals("500")) {
+                                            String err = jsonObjectError.getString("message");
+                                            Toast.makeText(getApplicationContext(), err, Toast.LENGTH_LONG).show();
+                                        } else if (status.equals("404")) {
+                                            String err = jsonObjectError.getString("message");
+                                            Toast.makeText(getApplicationContext(), err, Toast.LENGTH_LONG).show();
+                                        } else {
+                                            Toast.makeText(getApplicationContext(), "No se puedo conectar con el servidor. Compreuba que tienes acceso a la red.", Toast.LENGTH_LONG).show();
+                                        }
                                     }
-                                }else {
-                                    String status = jsonObjectError.getString("status");
-                                    if (status.equals("500")) {
-                                        String err = jsonObjectError.getString("message");
-                                        Toast.makeText(getApplicationContext(), err, Toast.LENGTH_LONG).show();
-                                    } else if (status.equals("404")) {
-                                        String err = jsonObjectError.getString("message");
-                                        Toast.makeText(getApplicationContext(), err, Toast.LENGTH_LONG).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), "No se puedo conectar con el servidor. Compreuba que tienes acceso a la red.", Toast.LENGTH_LONG).show();
-                                    }
+
                                 }
-
                             }catch (JSONException e){
-                                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                                //Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(SetPasswordActivity.this, "Servicio no disponible por el momento, intentalo más tarde", Toast.LENGTH_SHORT).show();
                             }
                         }
 

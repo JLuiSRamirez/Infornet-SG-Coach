@@ -10,100 +10,112 @@
     android:paddingTop="5dp"
     android:paddingRight="5dp">
 
-
-    <ImageView
-        android:id="@+id/imageView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="center"
-        android:paddingTop="10dp"
-        app:srcCompat="@mipmap/icon" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/nombre_coach"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView"
-        android:layout_marginTop="10dp"
-        android:hint="Nombre"
-        android:textColorHint="@android:color/white"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:textAlignment="center"
-        android:textSize="24dp"
-        android:textStyle="bold"
-        android:textColor="@android:color/white"/>
-
-    <TextView
-        android:id="@+id/correo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/nombre_coach"
-        android:layout_marginTop="1dp"
-        android:hint="Correo"
-        android:textColorHint="@android:color/white"
-        android:textColor="@android:color/white"
-        android:textSize="14sp"
-        android:textAlignment="center"/>
-
-    <TextView
-        android:id="@+id/gimnasio"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/correo"
-        android:layout_marginTop="1dp"
-        android:hint="Gimnasio"
-        android:textColor="@android:color/white"
-        android:textColorHint="@android:color/white"
-        android:textSize="14sp"
-        android:textAlignment="center" />
-
-    <TextView
-        android:id="@+id/horario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/gimnasio"
-        android:layout_marginTop="1dp"
-        android:hint="Horario"
-        android:textColor="@android:color/white"
-        android:textColorHint="@android:color/white"
-        android:textSize="14sp"
-        android:textAlignment="center" />
-
-    <TextView
-        android:id="@+id/biografia"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/horario"
-        android:layout_marginTop="15dp"
-        android:hint="Biografia"
-        android:textColorHint="@android:color/white"
-        android:textColor="@android:color/white"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:textAlignment="inherit"
-        android:textSize="20dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
 
-    <ProgressBar
-        android:id="@+id/prog_bar_perfil"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:layout_below="@+id/biografia"
-        android:indeterminateTint="@color/colorPrimary"
-        android:max="100"/>
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center"
+                android:paddingTop="10dp"
+                app:srcCompat="@mipmap/icon" />
 
-    <Button
-        android:id="@+id/btn_editar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/prog_bar_perfil"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="Editar" />
+            <TextView
+                android:id="@+id/nombre_coach"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView"
+                android:layout_marginTop="10dp"
+                android:hint="Nombre"
+                android:textColorHint="@android:color/white"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textAlignment="center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"/>
+
+            <TextView
+                android:id="@+id/correo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nombre_coach"
+                android:layout_marginTop="1dp"
+                android:hint="Correo"
+                android:textColorHint="@android:color/white"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:id="@+id/gimnasio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/correo"
+                android:layout_marginTop="1dp"
+                android:hint="Gimnasio"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textSize="14sp"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/horario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/gimnasio"
+                android:layout_marginTop="1dp"
+                android:hint="Horario"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textSize="14sp"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/biografia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/horario"
+                android:layout_marginTop="15dp"
+                android:hint="Biografia"
+                android:textColorHint="@android:color/white"
+                android:textColor="@android:color/white"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textAlignment="inherit"
+                android:textSize="20dp" />
+
+
+            <ProgressBar
+                android:id="@+id/prog_bar_perfil"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:layout_below="@+id/biografia"
+                android:indeterminateTint="@color/colorPrimary"
+                android:max="100"/>
+
+            <Button
+                android:id="@+id/btn_editar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/prog_bar_perfil"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:text="Editar" />
+        </LinearLayout>
+    </ScrollView>
 
 
 </RelativeLayout>

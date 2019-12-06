@@ -1,9 +1,14 @@
 package mx.infornet.sgcoach;
 
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,6 +16,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ProgressBar;
@@ -24,6 +30,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -58,6 +65,47 @@ public class LoginActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressbar);
         progressBar.setIndeterminate(true);
         progressBar.setVisibility(View.GONE);
+
+
+        BottomAppBar bottomAppBar = findViewById(R.id.options_login);
+
+
+        bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.nav_about_us:
+                        Toast.makeText(LoginActivity.this, "Presionaste el boton sobre nosotros", Toast.LENGTH_SHORT).show();
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+/*
+                        builder.setTitle("Diseño y desarrollo")
+                               .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        // User clicked OK button
+                                        Toast.makeText(LoginActivity.this, "Aceptar", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .setMessage("INFORNET" +
+                                "Boulevard del maestro 2707" +
+                                "Colonia Xicotencatl" +
+                                "Tlaxcala, Mexico");
+
+                        AlertDialog dialog = builder.create();
+                        dialog.show();*/
+
+
+                        break;
+                    case R.id.nav_contactanos:
+                        Toast.makeText(LoginActivity.this, "Presionaste el boton contactanos", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.nav_problems:
+                        Toast.makeText(LoginActivity.this, "Presionaste el boton reportar un problema", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                return false;
+            }
+        });
 
         queue = Volley.newRequestQueue(getApplicationContext());
 
@@ -130,6 +178,7 @@ public class LoginActivity extends AppCompatActivity {
                                 String postToken = jsonObject.getString("access_token");
                                 String tokenType = jsonObject.getString("token_type");
                                 JSONObject usuario = jsonObject.getJSONObject("usuario");
+                                JSONObject gym = usuario.getJSONObject("gimnasio");
 
                                 Log.d("ESTATUS", status);
 
@@ -144,12 +193,8 @@ public class LoginActivity extends AppCompatActivity {
                                     String postEmail = usuario.getString("email");
                                     String postHorarios = usuario.getString("horarios");
                                     String postGimnasio = usuario.getString("id_gimnasio");
-                                    //CUANDO BENITO REGRESE EL NOMBRE DEL GIMNASIO AGREGARLO ACA PARA GUARDARLO LOCALMENTE
-                                    //--
-                                    //--
-                                    //--
-                                    //--
-                                    //--
+                                    String postNombreGimnasio = gym.getString("nombre");
+
 
 
                                     ConexionSQLiteHelper con = new ConexionSQLiteHelper(getApplicationContext(), "coaches", null, 3);
@@ -162,6 +207,7 @@ public class LoginActivity extends AppCompatActivity {
                                     values.put("biografia", postBiografia);
                                     values.put("horarios", postHorarios);
                                     values.put("gimnasio", postGimnasio);
+                                    values.put("nombre_gimnasio", postNombreGimnasio);
                                     values.put("token", postToken);
                                     values.put("token_type",tokenType);
 
@@ -186,7 +232,8 @@ public class LoginActivity extends AppCompatActivity {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 String err = e.toString();
-                                Toast.makeText(getApplicationContext(), "Error " + err, Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Servicio no disponible, intentalo nuevamente más tarde", Toast.LENGTH_LONG).show();
+                                //Toast.makeText(LoginActivity.this, "Error: " + err, Toast.LENGTH_SHORT).show();
                             }
                         }
                     }, new Response.ErrorListener() {
@@ -238,4 +285,5 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
 }
