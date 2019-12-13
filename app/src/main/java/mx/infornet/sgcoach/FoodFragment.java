@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,6 +25,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,7 +44,8 @@ public class FoodFragment extends Fragment {
     private StringRequest request;
     private RequestQueue queue;
     private String token, token_type;
-    private Button btn_add;
+    private FloatingActionButton btn_add_;
+    private ProgressBar progressBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,9 +60,12 @@ public class FoodFragment extends Fragment {
         recyclerView = myView.findViewById(R.id.recycler_view_alimentacion);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        btn_add = myView.findViewById(R.id.btn_add_alim);
+        btn_add_ = myView.findViewById(R.id.btn_planes_alimentacion_add);
+        progressBar = myView.findViewById(R.id.progressbar_alim);
+        progressBar.setIndeterminate(true);
+        progressBar.setVisibility(View.VISIBLE);
 
-        btn_add.setOnClickListener(new View.OnClickListener() {
+        btn_add_.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -148,6 +153,7 @@ public class FoodFragment extends Fragment {
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
+                progressBar.setVisibility(View.GONE);
 
             }
         }, new Response.ErrorListener() {

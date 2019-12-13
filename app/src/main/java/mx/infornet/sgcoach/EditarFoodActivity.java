@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -35,6 +36,7 @@ public class EditarFoodActivity extends AppCompatActivity {
     private StringRequest request;
     private RequestQueue queue;
     private String token, token_type;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +82,10 @@ public class EditarFoodActivity extends AppCompatActivity {
 
         editar = findViewById(R.id.edit_alim);
 
+        progressBar = findViewById(R.id.progressbar_edit_food);
+        progressBar.setIndeterminate(true);
+        progressBar.setVisibility(View.GONE);
+
         editar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,10 +109,11 @@ public class EditarFoodActivity extends AppCompatActivity {
                     et_categoria.requestFocus();
 
                 } else {
-
+                    progressBar.setVisibility(View.VISIBLE);
                     request = new StringRequest(Request.Method.PUT, Config.PUT_ALIM_URL + id, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
+                            progressBar.setVisibility(View.GONE);
                             try {
                                 JSONObject jsonObject = new JSONObject(response);
                                 Log.d("RES_PUT", jsonObject.toString());
@@ -128,6 +135,7 @@ public class EditarFoodActivity extends AppCompatActivity {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            progressBar.setVisibility(View.GONE);
                             NetworkResponse networkResponse = error.networkResponse;
 
                             if(networkResponse != null && networkResponse.data != null){
@@ -135,40 +143,6 @@ public class EditarFoodActivity extends AppCompatActivity {
                                 try {
                                     JSONObject jsonObjectError = new JSONObject(jsonError);
                                     Log.d("ERROR500", jsonObjectError.toString());
-                                    //String status = jsonObjectError.getString("status");
-
-                                    /*if (jsonObjectError.has("message")){
-                                        String message = jsonObjectError.getString("message");
-                                        //Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
-                                        if (message.equals("The given data was invalid.")){
-                                            JSONObject errors = jsonObjectError.getJSONObject("errors");
-                                            if (errors.has("nombre")){
-                                                String errorNombre = errors.getString("nombre");
-                                                nombre.setError(errorNombre);
-                                                nombre.requestFocus();
-                                            } else if (errors.has("apellidos")){
-                                                String errorApe = errors.getString("apellidos");
-                                                apellidos.setError(errorApe);
-                                                apellidos.requestFocus();
-                                            } else if (errors.has("fecha_nacimiento")){
-                                                String errorFecha = errors.getString("fecha_nacimiento");
-                                                fecha.setError(errorFecha);
-                                                fecha.requestFocus();
-                                            } else if (errors.has("telefono")){
-                                                String errorTel = errors.getString("telefono");
-                                                telefono.setError(errorTel);
-                                                telefono.requestFocus();
-                                            } else if (errors.has("telefono_emergencia")){
-                                                String errorTelE = errors.getString("telefono_emergencia");
-                                                telEmer.setError(errorTelE);
-                                                telEmer.requestFocus();
-                                            } else if (errors.has("email")){
-                                                String errorEmail = errors.getString("email");
-                                                correo.setError(errorEmail);
-                                                correo.requestFocus();
-                                            }
-                                        }
-                                    }*/
 
                                 }catch (JSONException e){
                                     Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();

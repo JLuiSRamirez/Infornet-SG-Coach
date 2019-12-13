@@ -38,6 +38,7 @@
                     android:layout_alignParentRight="false"
                     app:menu="@menu/login_navigation"
                     app:backgroundTint="@android:color/transparent"
+
                     />
 
             </androidx.coordinatorlayout.widget.CoordinatorLayout>
@@ -58,8 +59,8 @@
                     android:id="@+id/textView2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="60dp"
-                    android:layout_marginBottom="50dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"
                     android:gravity="center"
                     android:text="@string/login_title"
                     android:textAllCaps="true"
@@ -122,7 +123,7 @@
                     android:layout_width="150dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
                     android:padding="10dp"
                     android:text="@string/login_btn"
                     android:textAllCaps="false"

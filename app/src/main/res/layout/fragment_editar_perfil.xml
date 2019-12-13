@@ -3,37 +3,68 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/fondologin"
+    android:background="#FFF3E0"
     android:orientation="vertical"
     android:paddingTop="5dp"
     android:paddingBottom="5dp"
     android:paddingRight="5dp">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/logo_routines"
+            android:src="@mipmap/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:contentDescription="@string/app_name" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Smart-Gym"
+            android:textSize="26sp"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textColor="#000"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_editar_perfil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mis datos"
+        android:textColor="#000"
+        android:textAlignment="center"
+        android:textSize="22sp"
+        android:background="@drawable/degradado"
+        />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center"
         >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_centerHorizontal="true"
-                    android:paddingBottom="10dp"
-                    app:srcCompat="@mipmap/icon" />
+            android:orientation="vertical">
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/LoginTextInputLayoutStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nombre"
-                    android:textColorHint="@color/colorPrimary"
+                    android:textColorHint="@android:color/black"
                     app:hintAnimationEnabled="false"
                     android:layout_marginBottom="10dp">
 
@@ -42,10 +73,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_person_white_24dp"
+                        android:drawableTint="#08088A"
                         android:drawablePadding="15dp"
                         android:inputType="textPersonName"
-                        android:textColor="@android:color/white"
-                        android:textColorHint="@android:color/white" />
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@android:color/black" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -53,7 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Biografia"
-                    android:textColorHint="@color/colorPrimary"
+                    android:textColorHint="@android:color/black"
                     app:hintAnimationEnabled="false"
                     android:layout_marginBottom="10dp">
 
@@ -62,11 +94,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_biografia_white_24dp"
+                        android:drawableTint="#08088A"
                         android:drawablePadding="15dp"
                         android:singleLine="false"
                         android:gravity="start"
-                        android:textColor="@android:color/white"
-                        android:textColorHint="@android:color/white" />
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@android:color/black" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -74,7 +107,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Correo"
-                    android:textColorHint="@color/colorPrimary"
+                    android:textColorHint="@android:color/black"
                     app:hintAnimationEnabled="false"
                     android:layout_marginBottom="10dp">
 
@@ -83,10 +116,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_email_white_24dp"
+                        android:drawableTint="#08088A"
                         android:drawablePadding="15dp"
                         android:inputType="textEmailAddress"
-                        android:textColor="@android:color/white"
-                        android:textColorHint="@android:color/white"  />
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@android:color/black"  />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <ProgressBar
@@ -129,9 +163,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableStart="@mipmap/passwhite"
+                        android:drawableTint="#08088A"
                         android:inputType="textPassword"
                         android:drawablePadding="15dp"
-                        android:textColor="#FFF" />
+                        android:textColor="#000" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -150,9 +185,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableStart="@mipmap/passwhite"
+                        android:drawableTint="#08088A"
                         android:inputType="textPassword"
                         android:drawablePadding="15dp"
-                        android:textColor="#FFF" />
+                        android:textColor="#000" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -171,9 +207,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableStart="@mipmap/passwhite"
+                        android:drawableTint="#08088A"
                         android:inputType="textPassword"
                         android:drawablePadding="15dp"
-                        android:textColor="#FFF" />
+                        android:textColor="#000" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 

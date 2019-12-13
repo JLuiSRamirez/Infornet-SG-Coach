@@ -12,6 +12,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,11 +34,12 @@ import java.util.Map;
 
 public class ShowAlimentacionActivity extends AppCompatActivity {
 
-    private TextView nom, desc, cate;
+    private TextView nom, desc, cate, tv_eliminando;
     private FloatingActionButton btn_edit, btn_delete;
     private StringRequest request;
     private RequestQueue queue;
     private String token, token_type;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,9 @@ public class ShowAlimentacionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_show_alimentacion);
 
 
+        progressBar = findViewById(R.id.progressbar_delete_alim);
+        progressBar.setIndeterminate(true);
+        progressBar.setVisibility(View.GONE);
 
         Intent intent = getIntent();
         ConexionSQLiteHelper conn = new ConexionSQLiteHelper(getApplicationContext(), "coaches", null, 3);
@@ -75,6 +80,9 @@ public class ShowAlimentacionActivity extends AppCompatActivity {
         nom = findViewById(R.id.title_alimentacion);
         desc = findViewById(R.id.descripcion_alim);
         cate = findViewById(R.id.categoria_alim);
+
+        tv_eliminando = findViewById(R.id.tv_eliminando);
+        tv_eliminando.setVisibility(View.GONE);
 
         queue = Volley.newRequestQueue(this);
 
@@ -108,10 +116,13 @@ public class ShowAlimentacionActivity extends AppCompatActivity {
                         .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                progressBar.setVisibility(View.VISIBLE);
+                                tv_eliminando.setVisibility(View.VISIBLE);
                                 request = new StringRequest(Request.Method.DELETE, Config.DELETE_ALIM_URL+id, new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
-
+                                        progressBar.setVisibility(View.GONE);
+                                        tv_eliminando.setVisibility(View.VISIBLE);
                                         try {
 
                                             JSONObject jsonObject = new JSONObject(response);
@@ -121,25 +132,26 @@ public class ShowAlimentacionActivity extends AppCompatActivity {
 
                                                 String status = jsonObject.getString("status");
                                                 if (status.equals("Token is expired")) {
-                                                    Toast.makeText(getApplicationContext(), "Token invalido. Favor de iniciar sesión nuevamente", Toast.LENGTH_LONG).show();
+                                                    Toast.makeText(getApplicationContext(), "Token inválido. Favor de iniciar sesión nuevamente", Toast.LENGTH_LONG).show();
                                                 }
                                             } else if(jsonObject.has("message")){
                                                 String mensaje = jsonObject.getString("message");
 
                                                 Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
-
-                                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                                                finish();
+                                                ShowAlimentacionActivity.this.finish();
 
                                             }
 
                                         } catch (JSONException e){
-                                            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getApplicationContext(), "Ocurrio un error al borrar el contenido", Toast.LENGTH_LONG).show();
                                         }
                                     }
                                 }, new Response.ErrorListener() {
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
+                                        progressBar.setVisibility(View.GONE);
+                                        tv_eliminando.setVisibility(View.VISIBLE);
+
                                         Log.e("Error.Response", error.toString());
                                         String json = null;
                                         NetworkResponse response = error.networkResponse;

@@ -1,11 +1,8 @@
 package mx.infornet.sgcoach;
 
 import android.app.AlertDialog;
-import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,11 +10,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -46,6 +43,7 @@ public class AgregarFoodFragment extends Fragment {
     private StringRequest request;
     private RequestQueue queue;
     private String token, token_type;
+    private ProgressBar progressBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -88,9 +86,16 @@ public class AgregarFoodFragment extends Fragment {
 
         agregar = myView.findViewById(R.id.store_alim);
 
+        progressBar = myView.findViewById(R.id.progressbar_add_food);
+        progressBar.setIndeterminate(true);
+        progressBar.setVisibility(View.GONE);
+
+
         agregar.setOnClickListener(new View.OnClickListener() {
+       // btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 final String nombre = iet_nombre.getText().toString();
                 final String descripcion = iet_descripcion.getText().toString();
                 final String categoria = iet_categoria.getText().toString();
@@ -109,6 +114,7 @@ public class AgregarFoodFragment extends Fragment {
                     request = new StringRequest(Request.Method.POST, Config.ADD_ALIM_URL, new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
+                            progressBar.setVisibility(View.GONE);
                             try {
                                 JSONObject jsonObject = new JSONObject(response);
 
@@ -136,6 +142,7 @@ public class AgregarFoodFragment extends Fragment {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            progressBar.setVisibility(View.GONE);
 
                             NetworkResponse networkResponse = error.networkResponse;
 

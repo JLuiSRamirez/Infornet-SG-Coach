@@ -1,19 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFF3E0"
     tools:context=".ShowAlimentacionActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:background="@android:color/transparent">
+
+        <ImageView
+            android:src="@mipmap/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:contentDescription="@string/app_name" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Smart-Gym"
+            android:textSize="26sp"
+            android:textColor="#000"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:paddingTop="5dp"
+        android:background="#fff"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/fondo_degradado"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ProgressBar
+                    android:id="@+id/progressbar_delete_alim"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/colorPrimary"
+                    android:max="100"/>
+
+                <TextView
+                    android:id="@+id/tv_eliminando"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@android:color/holo_red_dark"
+                    android:textSize="16sp"
+                    android:layout_gravity="center"
+                    android:textStyle="italic"
+                    android:text="Eliminando..."
+                    />
+
+            </LinearLayout>
+
+
 
             <TextView
                 android:id="@+id/title_alimentacion"
@@ -23,43 +99,54 @@
                 android:text="Nombre plan"
                 android:textColor="@color/design_default_color_on_secondary"
                 android:textSize="24sp"
+                android:background="@drawable/degradado"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/categoria_alim"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Categoria" />
+                android:text="Categoria"
+                android:textAlignment="center"
+                android:background="#FFF8D0"/>
 
             <TextView
                 android:id="@+id/descripcion_alim"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="descripcion" />
+                android:text="descripcion"
+                android:background="@drawable/fondo_degradado"/>
 
         </LinearLayout>
     </ScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_edit_alim"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="5dp"
-        android:clickable="true"
-        android:focusable="true"
-        app:srcCompat="@drawable/ic_edit_24dp" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_delete_alim"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="5dp"
-        android:layout_toLeftOf="@id/btn_edit_alim"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@android:drawable/ic_menu_delete" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_edit_alim"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="5dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginBottom="5dp"
+            app:srcCompat="@drawable/ic_edit_24dp" />
 
-</RelativeLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_delete_alim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="5dp"
+            android:layout_toLeftOf="@id/btn_edit_alim"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginBottom="5dp"
+            android:src="@android:drawable/ic_menu_delete" />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

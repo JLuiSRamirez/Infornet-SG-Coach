@@ -88,19 +88,13 @@ public class SetPasswordActivity extends AppCompatActivity {
                             try {
                                 JSONObject jsonObject = new JSONObject(response);
 
-                                Log.d("RES_SET_PASS", jsonObject.toString());
-
-                                if (jsonObject.has("error")){
-
-                                    String error = jsonObject.getString("error");
-                                    Toast.makeText(getApplicationContext(), error, Toast.LENGTH_LONG).show();
-
-                                } else if(jsonObject.has("status")){
+                                if (jsonObject.has("status")){
 
                                     String status = jsonObject.getString("status");
                                     String postToken = jsonObject.getString("access_token");
+                                    String tokenType = jsonObject.getString("token_type");
                                     JSONObject usuario = jsonObject.getJSONObject("usuario");
-                                    String error = jsonObject.getString("error");
+                                    JSONObject gym = usuario.getJSONObject("gimnasio");
 
                                     if (status.equals("200")) {
                                         //Log.d("JSONUSUARIO", usuario.toString());
@@ -112,6 +106,7 @@ public class SetPasswordActivity extends AppCompatActivity {
                                         String postEmail = usuario.getString("email");
                                         String postHorarios = usuario.getString("horarios");
                                         String postGimnasio = usuario.getString("id_gimnasio");
+                                        String postNombreGimnasio = gym.getString("nombre");
 
                                         ConexionSQLiteHelper con = new ConexionSQLiteHelper(getApplicationContext(), "coaches", null, 3);
                                         SQLiteDatabase db = con.getWritableDatabase();
@@ -123,7 +118,9 @@ public class SetPasswordActivity extends AppCompatActivity {
                                         values.put("email", postEmail);
                                         values.put("horarios", postHorarios);
                                         values.put("gimnasio", postGimnasio);
+                                        values.put("nombre_gimnasio", postNombreGimnasio);
                                         values.put("token", postToken);
+                                        values.put("token_type",tokenType);
 
                                         db.insert("coaches", null, values);
                                         db.close();
@@ -143,7 +140,6 @@ public class SetPasswordActivity extends AppCompatActivity {
                                     }else if ( status.equals("500")) {
                                         String msg = jsonObject.getString("message");
                                         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
-                                        Toast.makeText(getApplicationContext(), "Tostada de response", Toast.LENGTH_LONG).show();
                                     }
                                 }
 
@@ -155,7 +151,7 @@ public class SetPasswordActivity extends AppCompatActivity {
                             } catch (JSONException e){
                                 e.printStackTrace();
                                 String err = e.toString();
-                                Toast.makeText(getApplicationContext(), "Error " + err, Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Error-> " + err, Toast.LENGTH_LONG).show();
                             }
 
                         }
