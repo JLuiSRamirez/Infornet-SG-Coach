@@ -30,6 +30,12 @@ public class Config {
     public static final String GET_ENTRENAMIENTO_URL = "https://smartgym.infornet.mx/api/coach/planes-entrenamiento";
 
 
+    public static final String GET_RUTINAS_URL = "https://smartgym.infornet.mx/api/coach/rutinas";
+
+    public static final String ADD_RUTINAS_URL = "https://smartgym.infornet.mx/api/coach/rutinas";
+
+
+
     public static final String LOGOUT_URL = "https://smartgym.infornet.mx/api/coach/logout";
 
 }
