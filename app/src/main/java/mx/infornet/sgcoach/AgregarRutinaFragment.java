@@ -97,7 +97,7 @@ public class AgregarRutinaFragment extends Fragment {
             tv_regresar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Fragment rutinas = new HomeFragment();
+                    Fragment rutinas = new RoutinesFragment();
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     transaction.replace(R.id.fragment_container, rutinas);
                     transaction.addToBackStack(null);
