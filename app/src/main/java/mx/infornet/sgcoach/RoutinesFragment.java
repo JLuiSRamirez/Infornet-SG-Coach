@@ -48,8 +48,7 @@ public class RoutinesFragment extends Fragment {
     private StringRequest request;
     private RequestQueue queue;
     private String token, token_type, pag;
-    private int paginas, actual, todas;
-    private int cont;
+    private int actual, todas;
 
 
     private FloatingActionButton btn_rutinas_coach, btn_rutinas_gym, btn_planes_gym;
@@ -110,8 +109,14 @@ public class RoutinesFragment extends Fragment {
         btn_rutinas_gym.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tv_select_option.setVisibility(View.GONE);
+                //etiquetas de informacion y cambio de pagina
+                tv_pagina.setVisibility(View.GONE);
+                pagina_actual.setVisibility(View.GONE);
+                anterior.setVisibility(View.GONE);
+                siguiente.setVisibility(View.GONE);
                 info_rutinas.setVisibility(View.VISIBLE);
+                tv_select_option.setVisibility(View.GONE);
+
                 AdapterRutinas adapterRutinasgym = new AdapterRutinas(getContext(), null);
                 recyclerView.setAdapter(adapterRutinasgym);
                 Toast.makeText(getContext(), "tostada del boton mis rutinas", Toast.LENGTH_SHORT).show();
@@ -124,23 +129,26 @@ public class RoutinesFragment extends Fragment {
         btn_rutinas_coach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                tv_pagina.setVisibility(View.GONE);
+                pagina_actual.setVisibility(View.GONE);
+                anterior.setVisibility(View.GONE);
+                siguiente.setVisibility(View.GONE);
                 tv_select_option.setVisibility(View.GONE);
                 info_rutinas.setVisibility(View.VISIBLE);
-                progressBar.setVisibility(View.VISIBLE);
+
                 //Toast.makeText(getContext(), "Tostada del boton rutinas gym", Toast.LENGTH_SHORT).show();
                 tv_titulo.setVisibility(View.VISIBLE);
                 tv_titulo.setText("MIS RUTINAS");
-                siguiente.setVisibility(View.VISIBLE);
 
                 getRutinasCoach(1);
-                if (todas > 1){
-                    siguiente.setVisibility(View.VISIBLE);
-                }
+
                 actual = 1;
                 pag = Integer.toString(actual);
                 tv_pagina.setVisibility(View.VISIBLE);
                 pagina_actual.setVisibility(View.VISIBLE);
                 pagina_actual.setText(pag);
+                Toast.makeText(getContext(), "Todas: " + todas, Toast.LENGTH_SHORT).show();
+
 
             }
         });
@@ -149,9 +157,6 @@ public class RoutinesFragment extends Fragment {
         anterior.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if ((actual + 1) <= todas){ //si ya no habra mas datos ocultamos el enlace al siguiente
-                    siguiente.setVisibility(View.VISIBLE);
-                }
                 //Toast.makeText(getContext(), "Actual boton siguiente: " + actual, Toast.LENGTH_SHORT).show();
                 //Toast.makeText(getContext(), "Todas boton sigfuiente: " + todas, Toast.LENGTH_SHORT).show();
                 if(actual > 1 ){
@@ -165,6 +170,10 @@ public class RoutinesFragment extends Fragment {
                     if ((actual) == 1){ //si ya no habra mas datos ocultamos el enlace al anterior
                         anterior.setVisibility(View.GONE);
                     }
+                }
+
+                if ((actual + 1) <= todas){ //si ya no habra mas datos ocultamos el enlace al siguiente
+                    siguiente.setVisibility(View.VISIBLE);
                 }
                 //getRutinasCoach(2);
             }
@@ -204,6 +213,14 @@ public class RoutinesFragment extends Fragment {
         btn_planes_gym.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                tv_pagina.setVisibility(View.GONE);
+                pagina_actual.setVisibility(View.GONE);
+                anterior.setVisibility(View.GONE);
+                siguiente.setVisibility(View.GONE);
+                info_rutinas.setVisibility(View.VISIBLE);
+                tv_select_option.setVisibility(View.GONE);
+
                 tv_select_option.setVisibility(View.GONE);
                 info_rutinas.setVisibility(View.VISIBLE);
                 Toast.makeText(getContext(), "Tostada del boton planes gym", Toast.LENGTH_SHORT).show();
@@ -230,6 +247,7 @@ public class RoutinesFragment extends Fragment {
     }
 
     public void getRutinasCoach(int page){
+        progressBar.setVisibility(View.VISIBLE);
         rutinasList = new ArrayList<>();
 
         ConexionSQLiteHelper conn = new ConexionSQLiteHelper(getActivity(), "coaches", null, 3);
@@ -265,12 +283,16 @@ public class RoutinesFragment extends Fragment {
             @Override
             public void onResponse(String response) {
                 progressBar.setVisibility(View.GONE);
+
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray datos = jsonObject.getJSONArray("data");
                     JSONObject pagination = jsonObject.getJSONObject("pagination");
 
                      todas = Integer.parseInt( pagination.getString("last_page"));
+                    if (todas > 1 && (actual + 1 <= todas)){
+                        siguiente.setVisibility(View.VISIBLE);
+                    }
 
                     if (jsonObject.has("pagination")) {
 

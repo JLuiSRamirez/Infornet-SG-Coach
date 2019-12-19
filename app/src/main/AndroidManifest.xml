@@ -12,8 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EditarFoodActivity"></activity>
+        <activity android:name=".EditarFoodActivity"/>
+        <activity android:name=".EditarRutinaActivity"/>
         <activity android:name=".ShowAlimentacionActivity" />
+        <activity android:name=".ShowRutinasActivity" />
         <activity android:name=".ForgetPasswordActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".ResetPasswordActivity">

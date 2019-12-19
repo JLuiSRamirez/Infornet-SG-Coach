@@ -1,7 +1,5 @@
 package mx.infornet.sgcoach;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +11,10 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -30,7 +32,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ShowAlimentacionActivity extends AppCompatActivity {
+public class ShowRutinasActivity extends AppCompatActivity {
 
     private TextView nom, desc, cate, tv_eliminando;
     private FloatingActionButton btn_edit, btn_delete;
@@ -45,7 +47,7 @@ public class ShowAlimentacionActivity extends AppCompatActivity {
         setContentView(R.layout.fragment_show_rutinas);
 
 
-        progressBar = findViewById(R.id.progressbar_delete_alim);
+        progressBar = findViewById(R.id.progressbar_edit_rutinas);
         progressBar.setIndeterminate(true);
         progressBar.setVisibility(View.GONE);
 
@@ -73,30 +75,27 @@ public class ShowAlimentacionActivity extends AppCompatActivity {
         final String nombre = intent.getStringExtra("nombre");
         final String descripcion = intent.getStringExtra("descripcion");
         final int id = intent.getIntExtra("id", 0);
-        final String categoria = intent.getStringExtra("categoria");
 
-        nom = findViewById(R.id.title_alimentacion);
-        desc = findViewById(R.id.descripcion_alim);
-        cate = findViewById(R.id.categoria_alim);
+        nom = findViewById(R.id.title_rutina);
+        desc = findViewById(R.id.descripcion_rutina);
+
 
         tv_eliminando = findViewById(R.id.tv_eliminando);
         tv_eliminando.setVisibility(View.GONE);
 
         queue = Volley.newRequestQueue(this);
 
-        btn_edit = findViewById(R.id.btn_edit_alim);
-        btn_delete = findViewById(R.id.btn_delete_alim);
+        btn_edit = findViewById(R.id.btn_edit_rutina);
+        btn_delete = findViewById(R.id.btn_delete_rutina);
 
         btn_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent ediIntent = new Intent(getApplicationContext(), EditarFoodActivity.class);
+                Intent ediIntent = new Intent(getApplicationContext(), EditarRutinaActivity.class);
                 ediIntent.putExtra("id", id);
                 ediIntent.putExtra("nombre", nombre);
                 ediIntent.putExtra("descripcion", descripcion);
-                ediIntent.putExtra("categoria", categoria);
-
                 startActivity(ediIntent);
 
             }
@@ -106,9 +105,9 @@ public class ShowAlimentacionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                new AlertDialog.Builder(ShowAlimentacionActivity.this)
+                new AlertDialog.Builder(ShowRutinasActivity.this)
                         .setTitle("Atención !")
-                        .setMessage("¿Estás seguro de eliminar este Plan de Alimentación?")
+                        .setMessage("¿Estás seguro de eliminar esta Rutina?")
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setCancelable(false)
                         .setPositiveButton("Si", new DialogInterface.OnClickListener() {
@@ -116,7 +115,7 @@ public class ShowAlimentacionActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 progressBar.setVisibility(View.VISIBLE);
                                 tv_eliminando.setVisibility(View.VISIBLE);
-                                request = new StringRequest(Request.Method.DELETE, Config.DELETE_ALIM_URL+id, new Response.Listener<String>() {
+                                request = new StringRequest(Request.Method.DELETE, Config.DELETE_RUTINAS_URL+id, new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
                                         progressBar.setVisibility(View.GONE);
@@ -131,14 +130,18 @@ public class ShowAlimentacionActivity extends AppCompatActivity {
                                                 String status = jsonObject.getString("status");
                                                 if (status.equals("Token is expired")) {
                                                     Toast.makeText(getApplicationContext(), "Token inválido. Favor de iniciar sesión nuevamente", Toast.LENGTH_LONG).show();
+                                                    //____________________________SALIR DE LA PALICACION AQUI---------------------------------------
                                                 }
                                             } else if(jsonObject.has("message")){
                                                 String mensaje = jsonObject.getString("message");
 
                                                 Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_LONG).show();
-                                                ShowAlimentacionActivity.this.finish();
+                                                ShowRutinasActivity.this.finish();
+                                                //Intent intento = new Intent(getApplicationContext(), MainActivity.class);
+                                                //startActivity(intento);
 
-                                            }
+
+                                        }
 
                                         } catch (JSONException e){
                                             Toast.makeText(getApplicationContext(), "Ocurrio un error al borrar el contenido", Toast.LENGTH_LONG).show();
@@ -184,9 +187,6 @@ public class ShowAlimentacionActivity extends AppCompatActivity {
 
         nom.setText(nombre);
         desc.setText(descripcion);
-        cate.setText(categoria);
-
-
 
     }
 }

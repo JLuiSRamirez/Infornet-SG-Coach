@@ -74,7 +74,7 @@ public class AdapterRutinas extends RecyclerView.Adapter<AdapterRutinas.RutinasV
 
                     //acá se lanza a un nuevo fragment
 
-                    Intent inRutina = new Intent(mCtx, ShowAlimentacionActivity.class);
+                    Intent inRutina = new Intent(mCtx, ShowRutinasActivity.class);
                     inRutina.putExtra("id", idRutina);
                     inRutina.putExtra("nombre", nombreRutina);
                     inRutina.putExtra("descripcion", descrRutina);

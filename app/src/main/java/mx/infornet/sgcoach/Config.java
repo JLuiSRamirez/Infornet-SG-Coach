@@ -34,6 +34,10 @@ public class Config {
 
     public static final String ADD_RUTINAS_URL = "https://smartgym.infornet.mx/api/coach/rutinas";
 
+    public static final String DELETE_RUTINAS_URL = "https://smartgym.infornet.mx/api/coach/rutinas/";
+
+    public static final String PUT_RUTINAS_URL = "https://smartgym.infornet.mx/api/coach/rutinas/";
+
 
 
     public static final String LOGOUT_URL = "https://smartgym.infornet.mx/api/coach/logout";
