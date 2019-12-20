@@ -130,7 +130,12 @@ public class ShowRutinasActivity extends AppCompatActivity {
                                                 String status = jsonObject.getString("status");
                                                 if (status.equals("Token is expired")) {
                                                     Toast.makeText(getApplicationContext(), "Token inválido. Favor de iniciar sesión nuevamente", Toast.LENGTH_LONG).show();
-                                                    //____________________________SALIR DE LA PALICACION AQUI---------------------------------------
+                                                    ConexionSQLiteHelper  con = new ConexionSQLiteHelper(getApplicationContext(), "coaches", null, 3);
+                                                    SQLiteDatabase dbase = con.getWritableDatabase();
+                                                    dbase.execSQL("DELETE FROM coaches");
+
+                                                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                                                    ShowRutinasActivity.this.finish();
                                                 }
                                             } else if(jsonObject.has("message")){
                                                 String mensaje = jsonObject.getString("message");

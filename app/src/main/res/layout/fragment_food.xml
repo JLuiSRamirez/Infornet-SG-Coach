@@ -28,7 +28,8 @@
             android:textSize="26sp"
             android:textAlignment="center"
             android:layout_gravity="center"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:textColor="#000"/>
 
     </LinearLayout>
 
@@ -53,6 +54,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="10dp"
             android:textSize="22sp"
+            android:textColor="#000"
             />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -71,30 +73,33 @@
     </LinearLayout>
 
 
+    <TextView
+        android:id="@+id/info_alimentacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:paddingRight="10dp"
+        android:text="*Los resultados se muestran de 10 en 10"
+        android:textAlignment="viewEnd"
+        android:textColor="#F00"
+        android:textSize="12sp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="10dp"
         android:background="#FFF3E0">
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/recycler_view_alimentacion"
-            android:background="#FFD180"
+            android:background="@drawable/fondo_degradado"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             >
 
         </androidx.recyclerview.widget.RecyclerView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
-            android:orientation="vertical"
-            android:background="@android:color/transparent">
 
             <ProgressBar
                 android:id="@+id/progressbar_alim"
@@ -104,7 +109,69 @@
                 android:indeterminateTint="@color/colorPrimary"
                 android:max="100"/>
 
-        </LinearLayout>
-
     </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="25dp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:id="@+id/anterior"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Anterior"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:textColor="#00F"
+            android:textStyle="italic"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tv_pagina"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:text="Página: "
+            android:layout_gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:paddingRight="1dp"/>
+
+        <TextView
+            android:id="@+id/pagina_actual"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/colorPrimary"
+            android:textAlignment="center"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/siguiente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Siguiente"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:textColor="#00f"
+            android:textStyle="italic"
+            android:textSize="15sp"
+            />
+
+
+    </LinearLayout>
+
+
 </LinearLayout>

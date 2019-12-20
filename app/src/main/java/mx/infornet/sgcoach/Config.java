@@ -27,9 +27,6 @@ public class Config {
     public static final String PUT_ALIM_URL = "https://smartgym.infornet.mx/api/coach/planes-alimentacion/";
 
 
-    public static final String GET_ENTRENAMIENTO_URL = "https://smartgym.infornet.mx/api/coach/planes-entrenamiento";
-
-
     public static final String GET_RUTINAS_URL = "https://smartgym.infornet.mx/api/coach/rutinas";
 
     public static final String ADD_RUTINAS_URL = "https://smartgym.infornet.mx/api/coach/rutinas";
@@ -37,6 +34,9 @@ public class Config {
     public static final String DELETE_RUTINAS_URL = "https://smartgym.infornet.mx/api/coach/rutinas/";
 
     public static final String PUT_RUTINAS_URL = "https://smartgym.infornet.mx/api/coach/rutinas/";
+
+
+    public static final String GET_PLANES_URL = "https://smartgym.infornet.mx/api/coach/planes-entrenamiento";
 
 
 

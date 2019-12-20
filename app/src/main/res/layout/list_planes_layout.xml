@@ -6,13 +6,19 @@
     android:orientation="vertical">
 
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
         <androidx.cardview.widget.CardView
-            android:id="@+id/card_view_item"
+            android:id="@+id/card_view_item_plan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
@@ -23,22 +29,24 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="45dp"
                 android:padding="10dp">
 
                 <TextView
-                    android:id="@+id/nombre_alim"
+                    android:id="@+id/nombre_plan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="@string/alimentacion"
+                    android:text="Planes"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                     android:textSize="18sp" />
 
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
+        </ScrollView>
 
     </LinearLayout>
+
 
 </LinearLayout>

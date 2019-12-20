@@ -66,7 +66,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/fondo_degradado">
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/LoginTextInputLayoutStyle"
@@ -90,7 +93,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/LoginTextInputLayoutStyle"
                 android:layout_width="match_parent"
-                android:layout_height="310dp"
+                android:layout_height="200dp"
                 android:layout_marginBottom="5dp"
                 android:hint="Descripcion"
                 android:textColorHint="#000"

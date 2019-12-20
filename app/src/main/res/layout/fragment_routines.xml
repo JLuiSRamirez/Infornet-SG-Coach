@@ -162,48 +162,14 @@
                 </androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:gravity="center">
 
-            <TextView
-                android:id="@+id/tv_pagina"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:text="Pagina: "
-                android:textColor="#000"
-                android:textAlignment="center"
-                android:textStyle="bold"
-                android:paddingRight="5dp"/>
-
-            <TextView
-                android:id="@+id/pagina_actual"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:textColor="#00F"
-                android:textAlignment="center"
-                android:textStyle="bold"/>
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="25dp"
         android:layout_gravity="center"
         android:textAlignment="center"
         android:gravity="center"
@@ -214,21 +180,47 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Anterior"
-            android:layout_gravity="start"
-            android:layout_marginRight="30dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:textColor="#00F"
+            android:textStyle="italic"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tv_pagina"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:text="Página: "
+            android:layout_gravity="center"
             android:textColor="@color/colorPrimary"
+            android:textAlignment="center"
             android:textStyle="bold"
-            android:textSize="20sp"/>
+            android:paddingRight="1dp"/>
+
+        <TextView
+            android:id="@+id/pagina_actual"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textColor="@color/colorPrimary"
+            android:textAlignment="center"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/siguiente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Siguiente"
-            android:layout_marginLeft="30dp"
-            android:textColor="@color/colorPrimary"
-            android:textStyle="bold"
-            android:textSize="20sp"/>
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:textColor="#00f"
+            android:textStyle="italic"
+            android:textSize="15sp"
+            />
 
 
     </LinearLayout>

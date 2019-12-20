@@ -45,12 +45,11 @@ public class RoutinesFragment extends Fragment {
     private TextView tv_titulo, tv_select_option, info_rutinas, anterior, siguiente, pagina_actual, tv_pagina;
     private RecyclerView recyclerView;
     private List<Rutinas> rutinasList;
+    private List<Planes> planesList;
     private StringRequest request;
     private RequestQueue queue;
     private String token, token_type, pag;
     private int actual, todas;
-
-
     private FloatingActionButton btn_rutinas_coach, btn_rutinas_gym, btn_planes_gym;
 
     @Override
@@ -116,9 +115,9 @@ public class RoutinesFragment extends Fragment {
                 siguiente.setVisibility(View.GONE);
                 info_rutinas.setVisibility(View.VISIBLE);
                 tv_select_option.setVisibility(View.GONE);
-
                 AdapterRutinas adapterRutinasgym = new AdapterRutinas(getContext(), null);
                 recyclerView.setAdapter(adapterRutinasgym);
+
                 Toast.makeText(getContext(), "tostada del boton mis rutinas", Toast.LENGTH_SHORT).show();
                 tv_titulo.setVisibility(View.VISIBLE);
                 tv_titulo.setText("RUTINAS GIMNASIO");
@@ -135,8 +134,10 @@ public class RoutinesFragment extends Fragment {
                 siguiente.setVisibility(View.GONE);
                 tv_select_option.setVisibility(View.GONE);
                 info_rutinas.setVisibility(View.VISIBLE);
+                AdapterRutinas adapterRutinasgym = new AdapterRutinas(getContext(), null);
+                recyclerView.setAdapter(adapterRutinasgym);
 
-                //Toast.makeText(getContext(), "Tostada del boton rutinas gym", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Tostada del boton rutinas gym", Toast.LENGTH_SHORT).show();
                 tv_titulo.setVisibility(View.VISIBLE);
                 tv_titulo.setText("MIS RUTINAS");
 
@@ -147,8 +148,6 @@ public class RoutinesFragment extends Fragment {
                 tv_pagina.setVisibility(View.VISIBLE);
                 pagina_actual.setVisibility(View.VISIBLE);
                 pagina_actual.setText(pag);
-                Toast.makeText(getContext(), "Todas: " + todas, Toast.LENGTH_SHORT).show();
-
 
             }
         });
@@ -220,10 +219,16 @@ public class RoutinesFragment extends Fragment {
                 siguiente.setVisibility(View.GONE);
                 info_rutinas.setVisibility(View.VISIBLE);
                 tv_select_option.setVisibility(View.GONE);
+                AdapterRutinas adapterRutinasgym = new AdapterRutinas(getContext(), null);
+                recyclerView.setAdapter(adapterRutinasgym);
+
+
+
+getPlanesGym(1);
 
                 tv_select_option.setVisibility(View.GONE);
                 info_rutinas.setVisibility(View.VISIBLE);
-                Toast.makeText(getContext(), "Tostada del boton planes gym", Toast.LENGTH_SHORT).show();
+                ///Toast.makeText(getContext(), "Tostada del boton planes gym", Toast.LENGTH_SHORT).show();
                 tv_titulo.setVisibility(View.VISIBLE);
                 tv_titulo.setText("PLANES DE ENTRENAMIENTO");
             }
@@ -283,7 +288,6 @@ public class RoutinesFragment extends Fragment {
             @Override
             public void onResponse(String response) {
                 progressBar.setVisibility(View.GONE);
-
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray datos = jsonObject.getJSONArray("data");
@@ -295,7 +299,6 @@ public class RoutinesFragment extends Fragment {
                     }
 
                     if (jsonObject.has("pagination")) {
-
 
                         JSONArray array = datos;
 
@@ -315,6 +318,128 @@ public class RoutinesFragment extends Fragment {
 
                             recyclerView.setAdapter(adapterRutinas);
                         }
+                    }else {
+                        Toast.makeText(getContext(), "No hay nada que mostrar", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e){
+                    Log.e("ERROR_JSON: ", e.toString());
+                }
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+
+                    if (jsonObject.has("status")){
+                        String status = jsonObject.getString("status");
+
+                        if (status.equals("Token is Expired")){
+                            Toast.makeText(getContext(), status+". Favor de iniciar sesión nuevamente", Toast.LENGTH_LONG).show();
+
+                            ConexionSQLiteHelper  conn = new ConexionSQLiteHelper(getContext(), "coaches", null, 3);
+                            SQLiteDatabase db = conn.getWritableDatabase();
+                            db.execSQL("DELETE FROM coaches");
+
+                            startActivity(new Intent(getContext(), LoginActivity.class));
+                            getActivity().finish();
+                        }
+
+                    }
+
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+                progressBar.setVisibility(View.GONE);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressBar.setVisibility(View.GONE);
+                Log.e("ERROR_RESPONSE: ", error.toString());
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap();
+                headers.put("Authorization", token_type + " " + token);
+                return headers;
+            }
+        };
+
+        queue.add(request);
+    }
+
+
+    public void getPlanesGym(int page){
+        progressBar.setVisibility(View.VISIBLE);
+        planesList = new ArrayList<>();
+
+        ConexionSQLiteHelper conn = new ConexionSQLiteHelper(getActivity(), "coaches", null, 3);
+        SQLiteDatabase db = conn.getWritableDatabase();
+
+        try {
+            String query = "SELECT * FROM coaches";
+
+            Cursor cursor = db.rawQuery(query, null);
+
+            for(cursor.moveToFirst(); !cursor.isAfterLast();cursor.moveToNext()) {
+                token = cursor.getString(cursor.getColumnIndex("token"));
+                token_type = cursor.getString(cursor.getColumnIndex("token_type"));
+            }
+
+        } catch (Exception e) {
+            Toast.makeText(getActivity(), "Error al cargar credenciales de identificacion, Inicia sesion nuevamente " + e.toString(), Toast.LENGTH_LONG).show();
+            ConexionSQLiteHelper  con = new ConexionSQLiteHelper(getContext(), "coaches", null, 3);
+            SQLiteDatabase dbase = con.getWritableDatabase();
+            dbase.execSQL("DELETE FROM coaches");
+
+            startActivity(new Intent(getContext(), LoginActivity.class));
+            getActivity().finish();
+        }
+
+        Log.d("token", token);
+
+        db.close();
+
+        queue = Volley.newRequestQueue(getContext());
+
+        request = new StringRequest(Request.Method.GET, Config.GET_PLANES_URL + "?page="+page, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                progressBar.setVisibility(View.GONE);
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray datos = jsonObject.getJSONArray("data");
+                    JSONObject pagination = jsonObject.getJSONObject("pagination");
+
+                    todas = Integer.parseInt( pagination.getString("last_page"));
+                    if (todas > 1 && (actual + 1 <= todas)){
+                        siguiente.setVisibility(View.VISIBLE);
+                    }
+
+                    if (jsonObject.has("pagination")) {
+
+                        JSONArray array = datos;
+
+                        Log.d("PLANES GYM", array.toString());
+
+                        for (int i=0; i<array.length(); i++) {
+
+                            JSONObject plan = array.getJSONObject(i);
+
+                            planesList.add(new Planes(
+                                    plan.getInt("id"),
+                                    plan.getString("nombre"),
+                                    plan.getDouble("precio"),
+                                    plan.getString("servicios")
+                            ));
+
+                            AdapterPlanes adapterPlanes = new AdapterPlanes(getContext(), planesList);
+
+                            recyclerView.setAdapter(adapterPlanes);
+                        }
+                    }else {
+                        Toast.makeText(getContext(), "No hay nada que mostrar", Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e){

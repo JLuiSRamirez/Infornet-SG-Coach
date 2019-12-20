@@ -85,6 +85,7 @@
                     android:layout_gravity="center"
                     android:textStyle="italic"
                     android:text="Eliminando..."
+                    android:textColor="#F00"
                     />
 
             </LinearLayout>
@@ -106,15 +107,28 @@
                 android:id="@+id/categoria_alim"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
                 android:text="Categoria"
+                android:textSize="19sp"
                 android:textAlignment="center"
-                android:background="#FFF8D0"/>
+                />
 
             <TextView
                 android:id="@+id/descripcion_alim"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:text="descripcion"
+                android:textColor="#000"
+                android:textSize="17sp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:background="@drawable/fondo_degradado"/>
 
         </LinearLayout>

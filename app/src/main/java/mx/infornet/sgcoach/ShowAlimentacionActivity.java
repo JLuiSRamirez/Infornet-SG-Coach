@@ -42,7 +42,7 @@ public class ShowAlimentacionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_show_rutinas);
+        setContentView(R.layout.activity_show_alimentacion);
 
 
         progressBar = findViewById(R.id.progressbar_delete_alim);

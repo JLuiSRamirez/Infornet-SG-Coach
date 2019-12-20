@@ -16,6 +16,7 @@
         <activity android:name=".EditarRutinaActivity"/>
         <activity android:name=".ShowAlimentacionActivity" />
         <activity android:name=".ShowRutinasActivity" />
+        <activity android:name=".ShowPlanesActivity" />
         <activity android:name=".ForgetPasswordActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".ResetPasswordActivity">
