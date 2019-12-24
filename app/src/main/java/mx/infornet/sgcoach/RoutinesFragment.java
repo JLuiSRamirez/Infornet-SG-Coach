@@ -219,12 +219,11 @@ public class RoutinesFragment extends Fragment {
                 siguiente.setVisibility(View.GONE);
                 info_rutinas.setVisibility(View.VISIBLE);
                 tv_select_option.setVisibility(View.GONE);
+
                 AdapterRutinas adapterRutinasgym = new AdapterRutinas(getContext(), null);
                 recyclerView.setAdapter(adapterRutinasgym);
 
-
-
-getPlanesGym(1);
+                getPlanesGym(1);
 
                 tv_select_option.setVisibility(View.GONE);
                 info_rutinas.setVisibility(View.VISIBLE);

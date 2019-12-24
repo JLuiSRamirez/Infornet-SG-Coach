@@ -84,22 +84,25 @@
         android:textColor="#F00"
         android:textSize="12sp" />
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:background="#FFF3E0">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/recycler_view_alimentacion"
-            android:background="@drawable/fondo_degradado"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            >
 
-        </androidx.recyclerview.widget.RecyclerView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recycler_view_alimentacion"
+                    android:background="@drawable/fondo_degradado"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
 
             <ProgressBar
                 android:id="@+id/progressbar_alim"
@@ -110,7 +113,6 @@
                 android:max="100"/>
 
     </RelativeLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"

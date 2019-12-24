@@ -29,15 +29,16 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:padding="10dp">
+                android:layout_height="40dp"
+                >
 
                 <TextView
                     android:id="@+id/nombre_plan"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
+                    android:layout_height="40dp"
                     android:text="Planes"
+                    android:textAlignment="textStart"
+                    android:gravity="center_vertical"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                     android:textSize="18sp" />
 
