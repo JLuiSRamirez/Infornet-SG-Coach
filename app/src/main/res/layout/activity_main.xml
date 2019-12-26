@@ -20,25 +20,6 @@
             />
     </ScrollView>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/coordinator_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true" >
-
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/options"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        app:menu="@menu/option_navigation"
-        app:backgroundTint="@android:color/transparent"
-        android:background="@android:color/transparent"
-        android:outlineAmbientShadowColor="@android:color/transparent"
-        />
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -51,5 +32,7 @@
         app:itemTextColor="@android:color/black"
         android:background="@drawable/degradado"
         />
+
+
 
 </RelativeLayout>

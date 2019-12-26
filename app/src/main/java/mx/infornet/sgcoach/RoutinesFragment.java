@@ -425,12 +425,14 @@ public class RoutinesFragment extends Fragment {
                         for (int i=0; i<array.length(); i++) {
 
                             JSONObject plan = array.getJSONObject(i);
+                            JSONArray services = plan.getJSONArray("servicios");
 
                             planesList.add(new Planes(
                                     plan.getInt("id"),
                                     plan.getString("nombre"),
                                     plan.getDouble("precio"),
-                                    plan.getString("servicios")
+                                    plan.getString("servicios"),
+                                    services
                             ));
 
                             AdapterPlanes adapterPlanes = new AdapterPlanes(getContext(), planesList);

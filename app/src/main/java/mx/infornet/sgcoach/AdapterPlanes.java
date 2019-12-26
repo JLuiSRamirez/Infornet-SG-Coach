@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.json.JSONArray;
+
 import java.util.List;
 
 public class AdapterPlanes extends RecyclerView.Adapter<AdapterPlanes.PlanesViewHolder> {
@@ -72,6 +74,7 @@ public class AdapterPlanes extends RecyclerView.Adapter<AdapterPlanes.PlanesView
                     String nombrePlan = planesList.get(requesCode).getNombre();
                     Double precioPlan = planesList.get(requesCode).getPrecio();
                     String serviciosPlan = planesList.get(requesCode).getServicios();
+                    String servicesPlan = planesList.get(requesCode).getServicios();
 
                     //acá se lanza a un nuevo fragment
 
@@ -80,6 +83,7 @@ public class AdapterPlanes extends RecyclerView.Adapter<AdapterPlanes.PlanesView
                     inPlan.putExtra("nombre", nombrePlan);
                     inPlan.putExtra("precio", precioPlan);
                     inPlan.putExtra("servicios", serviciosPlan);
+                    inPlan.putExtra("services", servicesPlan);
 
                     mCtx.startActivity(inPlan);
 

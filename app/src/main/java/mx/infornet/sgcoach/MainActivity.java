@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         BottomAppBar bottomAppBar = findViewById(R.id.options);
 
+        /*
         bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -84,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+        */
 
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,

@@ -200,7 +200,7 @@ public class FoodFragment extends Fragment {
 
         queue = Volley.newRequestQueue(getContext());
 
-        request = new StringRequest(Request.Method.GET, Config.GET_ALIMENTACION_URL, new Response.Listener<String>() {
+        request = new StringRequest(Request.Method.GET, Config.GET_ALIMENTACION_URL + "?page=" + page, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 progressBar.setVisibility(View.GONE);
