@@ -105,7 +105,8 @@ public class RoutinesFragment extends Fragment {
 
         progressBar.setVisibility(View.GONE);
 
-        btn_rutinas_gym.setOnClickListener(new View.OnClickListener() {
+
+        btn_rutinas_coach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //etiquetas de informacion y cambio de pagina
@@ -115,17 +116,20 @@ public class RoutinesFragment extends Fragment {
                 siguiente.setVisibility(View.GONE);
                 info_rutinas.setVisibility(View.VISIBLE);
                 tv_select_option.setVisibility(View.GONE);
-                AdapterRutinas adapterRutinasgym = new AdapterRutinas(getContext(), null);
+                AdapterRutinas adapterRutinasgym = new AdapterRutinas(getContext(), null, 1);
                 recyclerView.setAdapter(adapterRutinasgym);
+
+                getRutinasCoach();
 
                 Toast.makeText(getContext(), "tostada del boton mis rutinas", Toast.LENGTH_SHORT).show();
                 tv_titulo.setVisibility(View.VISIBLE);
-                tv_titulo.setText("RUTINAS GIMNASIO");
+                tv_titulo.setText("MIS RUTINAS");
             }
         });
 
+
         //al darle click deshabiliamos el boton hasta que elija otra opcion===========================
-        btn_rutinas_coach.setOnClickListener(new View.OnClickListener() {
+        btn_rutinas_gym.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 tv_pagina.setVisibility(View.GONE);
@@ -134,14 +138,14 @@ public class RoutinesFragment extends Fragment {
                 siguiente.setVisibility(View.GONE);
                 tv_select_option.setVisibility(View.GONE);
                 info_rutinas.setVisibility(View.VISIBLE);
-                AdapterRutinas adapterRutinasgym = new AdapterRutinas(getContext(), null);
+                AdapterRutinas adapterRutinasgym = new AdapterRutinas(getContext(), null, 0);
                 recyclerView.setAdapter(adapterRutinasgym);
 
-                Toast.makeText(getContext(), "Tostada del boton rutinas gym", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Tostada del boton rutinas gym", Toast.LENGTH_SHORT).show();
                 tv_titulo.setVisibility(View.VISIBLE);
-                tv_titulo.setText("MIS RUTINAS");
+                tv_titulo.setText("TODAS LAS RUTINAS");
 
-                getRutinasCoach(1);
+                getRutinasGym(1);
 
                 actual = 1;
                 pag = Integer.toString(actual);
@@ -153,6 +157,8 @@ public class RoutinesFragment extends Fragment {
         });
 
         //enlaces anterior y siguiente para lo de la paginacion
+
+
         anterior.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,7 +167,7 @@ public class RoutinesFragment extends Fragment {
                 if(actual > 1 ){
                     actual = actual - 1;
                     //Toast.makeText(getContext(), "Pagina actual: "+ actual, Toast.LENGTH_SHORT).show();
-                    getRutinasCoach(actual);
+                    getRutinasGym(actual);
                     tv_pagina.setVisibility(View.VISIBLE);
                     pagina_actual.setVisibility(View.VISIBLE);
                     pag = Integer.toString(actual);
@@ -191,7 +197,7 @@ public class RoutinesFragment extends Fragment {
                 if(actual < todas){
                     actual = actual + 1;
                     //Toast.makeText(getContext(), "Pagina actual: "+ actual, Toast.LENGTH_SHORT).show();
-                    getRutinasCoach(actual);
+                    getRutinasGym(actual);
                     tv_pagina.setVisibility(View.VISIBLE);
                     pagina_actual.setVisibility(View.VISIBLE);
                     pag = Integer.toString(actual);
@@ -220,7 +226,7 @@ public class RoutinesFragment extends Fragment {
                 info_rutinas.setVisibility(View.VISIBLE);
                 tv_select_option.setVisibility(View.GONE);
 
-                AdapterRutinas adapterRutinasgym = new AdapterRutinas(getContext(), null);
+                AdapterRutinas adapterRutinasgym = new AdapterRutinas(getContext(), null,0);
                 recyclerView.setAdapter(adapterRutinasgym);
 
                 getPlanesGym(1);
@@ -250,7 +256,112 @@ public class RoutinesFragment extends Fragment {
 
     }
 
-    public void getRutinasCoach(int page){
+    public void getRutinasCoach(){
+        progressBar.setVisibility(View.VISIBLE);
+        rutinasList = new ArrayList<>();
+
+        ConexionSQLiteHelper conn = new ConexionSQLiteHelper(getActivity(), "coaches", null, 3);
+        SQLiteDatabase db = conn.getWritableDatabase();
+
+        try {
+            String query = "SELECT * FROM coaches";
+
+            Cursor cursor = db.rawQuery(query, null);
+
+            for(cursor.moveToFirst(); !cursor.isAfterLast();cursor.moveToNext()) {
+                token = cursor.getString(cursor.getColumnIndex("token"));
+                token_type = cursor.getString(cursor.getColumnIndex("token_type"));
+            }
+
+        } catch (Exception e) {
+            Toast.makeText(getActivity(), "Error al cargar credenciales de identificacion, Inicia sesion nuevamente " + e.toString(), Toast.LENGTH_LONG).show();
+            ConexionSQLiteHelper  con = new ConexionSQLiteHelper(getContext(), "coaches", null, 3);
+            SQLiteDatabase dbase = con.getWritableDatabase();
+            dbase.execSQL("DELETE FROM coaches");
+
+            startActivity(new Intent(getContext(), LoginActivity.class));
+            getActivity().finish();
+        }
+
+        Log.d("token", token);
+
+        db.close();
+
+        queue = Volley.newRequestQueue(getContext());
+
+        request = new StringRequest(Request.Method.GET, Config.GET_MIS_RUTINAS_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                progressBar.setVisibility(View.GONE);
+                try {
+                    JSONArray array = new JSONArray(response);
+
+                        Log.d("RUTINAS DEL COACH", array.toString());
+
+                        for (int i=0; i<array.length(); i++) {
+
+                            JSONObject rutina = array.getJSONObject(i);
+
+                            rutinasList.add(new Rutinas(
+                                    rutina.getInt("id"),
+                                    rutina.getString("nombre"),
+                                    rutina.getString("descripcion")
+                            ));
+
+                            AdapterRutinas adapterRutinas = new AdapterRutinas(getContext(), rutinasList, 1);
+
+                            recyclerView.setAdapter(adapterRutinas);
+                        }
+
+
+                } catch (JSONException e){
+                    Log.e("ERROR_JSON: ", e.toString());
+                }
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+
+                    if (jsonObject.has("status")){
+                        String status = jsonObject.getString("status");
+
+                        if (status.equals("Token is Expired")){
+                            Toast.makeText(getContext(), status+". Favor de iniciar sesión nuevamente", Toast.LENGTH_LONG).show();
+
+                            ConexionSQLiteHelper  conn = new ConexionSQLiteHelper(getContext(), "coaches", null, 3);
+                            SQLiteDatabase db = conn.getWritableDatabase();
+                            db.execSQL("DELETE FROM coaches");
+
+                            startActivity(new Intent(getContext(), LoginActivity.class));
+                            getActivity().finish();
+                        }
+
+                    }
+
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
+                progressBar.setVisibility(View.GONE);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressBar.setVisibility(View.GONE);
+                Log.e("ERROR_RESPONSE: ", error.toString());
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap();
+                headers.put("Authorization", token_type + " " + token);
+                return headers;
+            }
+        };
+
+        queue.add(request);
+    }
+
+    public void getRutinasGym(int page){
         progressBar.setVisibility(View.VISIBLE);
         rutinasList = new ArrayList<>();
 
@@ -292,7 +403,7 @@ public class RoutinesFragment extends Fragment {
                     JSONArray datos = jsonObject.getJSONArray("data");
                     JSONObject pagination = jsonObject.getJSONObject("pagination");
 
-                     todas = Integer.parseInt( pagination.getString("last_page"));
+                    todas = Integer.parseInt( pagination.getString("last_page"));
                     if (todas > 1 && (actual + 1 <= todas)){
                         siguiente.setVisibility(View.VISIBLE);
                     }
@@ -313,7 +424,7 @@ public class RoutinesFragment extends Fragment {
                                     rutina.getString("descripcion")
                             ));
 
-                            AdapterRutinas adapterRutinas = new AdapterRutinas(getContext(), rutinasList);
+                            AdapterRutinas adapterRutinas = new AdapterRutinas(getContext(), rutinasList, 0);
 
                             recyclerView.setAdapter(adapterRutinas);
                         }
@@ -367,7 +478,6 @@ public class RoutinesFragment extends Fragment {
 
         queue.add(request);
     }
-
 
     public void getPlanesGym(int page){
         progressBar.setVisibility(View.VISIBLE);

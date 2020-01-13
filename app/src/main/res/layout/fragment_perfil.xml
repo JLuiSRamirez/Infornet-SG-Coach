@@ -40,9 +40,9 @@
         android:layout_height="wrap_content"
         android:text="Mi perfil"
         android:textAlignment="center"
-        android:textSize="22sp"
+        android:textSize="15sp"
         android:textColor="#000"
-        android:background="@drawable/degradado"
+        android:background="#000"
         />
 
     <ScrollView

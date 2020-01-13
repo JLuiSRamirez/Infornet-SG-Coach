@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FFF3E0"
     tools:context=".ShowAlimentacionActivity"
     android:layout_marginBottom="5dp">
 
@@ -64,11 +63,33 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="#FFF3E0"
-                android:gravity="center" />
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ProgressBar
+                    android:id="@+id/progressbar_edit_rutinas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/colorPrimary"
+                    android:max="100"/>
+
+                <TextView
+                    android:id="@+id/tv_eliminando"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@android:color/holo_red_dark"
+                    android:textSize="16sp"
+                    android:layout_gravity="center"
+                    android:textStyle="italic"
+                    android:text="Eliminando..."
+                    />
+
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/title_rutina"
@@ -93,14 +114,38 @@
                 android:layout_height="wrap_content"
                 android:paddingRight="5dp"
                 android:paddingLeft="5dp"
+                android:paddingBottom = "50dp"
                 android:text="Descripción"
-                android:background="@drawable/fondo_degradado"/>
+                android:background="#fff"/>
 
         </LinearLayout>
     </ScrollView>
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_edit_rutina"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="5dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginBottom="10dp"
+            android:paddingBottom="10dp"
+            app:srcCompat="@drawable/ic_edit_24dp" />
 
-
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_delete_rutina"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="5dp"
+            android:layout_toLeftOf="@id/btn_edit_rutina"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginBottom="10dp"
+            android:paddingBottom="10dp"
+            android:src="@android:drawable/ic_menu_delete" />
 
 
     </RelativeLayout>

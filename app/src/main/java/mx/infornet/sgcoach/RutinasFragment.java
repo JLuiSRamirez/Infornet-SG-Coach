@@ -132,7 +132,7 @@ public class RutinasFragment extends Fragment {
                                 rutina.getString("descripcion")
                         ));
 
-                        AdapterRutinas adapterRutinas = new AdapterRutinas(getContext(), rutinasList);
+                        AdapterRutinas adapterRutinas = new AdapterRutinas(getContext(), rutinasList,0);
 
                         recyclerView.setAdapter(adapterRutinas);
                     }

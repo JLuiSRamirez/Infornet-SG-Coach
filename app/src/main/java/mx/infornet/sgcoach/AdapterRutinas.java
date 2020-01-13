@@ -17,10 +17,12 @@ public class AdapterRutinas extends RecyclerView.Adapter<AdapterRutinas.RutinasV
 
     private Context mCtx;
     private List<Rutinas> rutinasList;
+    private int tipo;
 
-    public AdapterRutinas(Context mCtx, List<Rutinas> rutinasList) {
+    public AdapterRutinas(Context mCtx, List<Rutinas> rutinasList, int tipo) {
         this.mCtx = mCtx;
         this.rutinasList = rutinasList;
+        this.tipo = tipo;
     }
 
     @NonNull
@@ -74,12 +76,21 @@ public class AdapterRutinas extends RecyclerView.Adapter<AdapterRutinas.RutinasV
 
                     //acá se lanza a un nuevo fragment
 
-                    Intent inRutina = new Intent(mCtx, ShowRutinasActivity.class);
-                    inRutina.putExtra("id", idRutina);
-                    inRutina.putExtra("nombre", nombreRutina);
-                    inRutina.putExtra("descripcion", descrRutina);
+                    if (tipo == 1) {//RUTINAS COACH
 
-                    mCtx.startActivity(inRutina);
+                        Intent inRutina = new Intent(mCtx, ShowMisRutinasActivity.class);
+                        inRutina.putExtra("id", idRutina);
+                        inRutina.putExtra("nombre", nombreRutina);
+                        inRutina.putExtra("descripcion", descrRutina);
+                        mCtx.startActivity(inRutina);
+                    } else {
+                        Intent inRutina = new Intent(mCtx, ShowRutinasActivity.class);
+                        inRutina.putExtra("id", idRutina);
+                        inRutina.putExtra("nombre", nombreRutina);
+                        inRutina.putExtra("descripcion", descrRutina);
+                        mCtx.startActivity(inRutina);
+                    }
+
 
                 }
             });
