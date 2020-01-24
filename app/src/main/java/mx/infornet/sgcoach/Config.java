@@ -41,6 +41,8 @@ public class Config {
     public static final String GET_PLANES_URL = "https://smartgym.infornet.mx/api/coach/planes-entrenamiento";
 
 
+    public static final String ADD_MIEMBROS_URL = "https://smartgmy.infornet.mx/api/coach/miembros";
+
 
     public static final String LOGOUT_URL = "https://smartgym.infornet.mx/api/coach/logout";
 

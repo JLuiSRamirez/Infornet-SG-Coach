@@ -148,7 +148,7 @@
                 android:layout_marginRight="10dp"
                 android:text="Elige una opción para cargar el contenido"
                 android:textAlignment="center"
-                android:textColor="@color/colorPrimary"
+                android:textColor="#000"
                 android:textStyle="bold"
                 android:textSize="24sp" />
 

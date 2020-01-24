@@ -388,6 +388,8 @@ public class EditarPerfilFragment extends Fragment {
                         }catch (JSONException e){
                             Toast.makeText(getContext(), e.toString(), Toast.LENGTH_LONG).show();
                         }
+                    } else {
+                        Toast.makeText(getContext(), "Error inesperado", Toast.LENGTH_SHORT).show();
                     }
                 }
             }) {
