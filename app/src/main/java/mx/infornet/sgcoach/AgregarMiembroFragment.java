@@ -193,8 +193,8 @@ public class AgregarMiembroFragment extends Fragment {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
                                     progressBar.setVisibility(View.GONE);
-                                    //Toast.makeText(getContext(), "Error del response: " + error.toString(), Toast.LENGTH_SHORT).show();
-
+                                    Toast.makeText(getContext(), "Error del response: " + error.toString(), Toast.LENGTH_SHORT).show();
+/*
                                         try {
                                                 NetworkResponse networkResponse = error.networkResponse;
                                            // if(networkResponse != null && networkResponse.data != null) {
@@ -272,6 +272,7 @@ public class AgregarMiembroFragment extends Fragment {
                                             String err = e.toString();
                                             Toast.makeText(getContext(), "Error: " + err, Toast.LENGTH_SHORT).show();
                                         }
+                                        */
 
                                 } //errorResponse
                             }) {
@@ -308,7 +309,7 @@ public class AgregarMiembroFragment extends Fragment {
                     }
 
                 } //onClick
-            }); //boton guardar
+            }); //botón guardar
 
 
         }catch (Exception e) {

@@ -86,6 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nombre"
+            android:textSize="14sp"
             android:textColorHint="@android:color/black"
             app:hintAnimationEnabled="false"
             android:layout_marginBottom="5dp">
@@ -94,9 +95,9 @@
                 android:id="@+id/nombre_miembro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_person_white_24dp"
                 android:drawableTint="#000"
-                android:drawablePadding="15dp"
+                android:drawablePadding="5dp"
+                android:textSize="14sp"
                 android:inputType="textPersonName"
                 android:textColor="@android:color/black"
                 android:textColorHint="@android:color/black" />
@@ -107,6 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Apellidos"
+                android:textSize="14sp"
                 android:textColorHint="@android:color/black"
                 app:hintAnimationEnabled="false"
                 android:layout_marginBottom="5dp">
@@ -116,7 +118,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableTint="#000"
-                    android:drawablePadding="15dp"
+                    android:textSize="14sp"
+                    android:drawablePadding="5dp"
                     android:inputType="textPersonName"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/black" />
@@ -130,19 +133,21 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/LoginTextInputLayoutStyle"
-                android:layout_width="110dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Estatura (m)"
+                android:textSize="14sp"
                 android:textColorHint="@android:color/black"
                 app:hintAnimationEnabled="false"
                 android:layout_marginBottom="5dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/estatura_miembro"
-                    android:layout_width="110dp"
+                    android:layout_width="105dp"
                     android:layout_height="wrap_content"
                     android:drawableTint="#000"
                     android:drawablePadding="5dp"
+                    android:textSize="14sp"
                     android:inputType="textPersonName"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/black" />
@@ -150,39 +155,43 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/LoginTextInputLayoutStyle"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Peso (kg)"
+                android:textSize="14sp"
                 android:textColorHint="@android:color/black"
                 app:hintAnimationEnabled="false"
                 android:layout_marginBottom="5dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/peso_miembro"
-                    android:layout_width="100dp"
+                    android:layout_width="85dp"
                     android:layout_height="wrap_content"
                     android:drawablePadding="5dp"
                     android:drawableTint="#000"
                     android:inputType="textPersonName"
+                    android:textSize="14sp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/black" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/LoginTextInputLayoutStyle"
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Sexo"
+                android:textSize="14sp"
                 android:textColorHint="@android:color/black"
                 app:hintAnimationEnabled="false"
                 android:layout_marginBottom="5dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/sexo_miembro"
-                    android:layout_width="150dp"
+                    android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:drawableTint="#000"
                     android:drawablePadding="5dp"
+                    android:textSize="14sp"
                     android:inputType="textPersonName"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/black" />
@@ -195,6 +204,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Objetivo"
+                android:textSize="14sp"
                 android:textColorHint="@android:color/black"
                 app:hintAnimationEnabled="false"
                 android:layout_marginBottom="5dp">
@@ -204,6 +214,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableTint="#000"
+                    android:textSize="14sp"
                     android:drawablePadding="15dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/black" />
@@ -214,6 +225,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Fecha de nacimiento"
+                android:textSize="14sp"
                 android:textColorHint="@android:color/black"
                 app:hintAnimationEnabled="false"
                 android:layout_marginBottom="5dp">
@@ -223,6 +235,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableTint="#000"
+                    android:textSize="14sp"
                     android:drawablePadding="15dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/black" />
@@ -236,38 +249,42 @@
 
         <com.google.android.material.textfield.TextInputLayout
                 style="@style/LoginTextInputLayoutStyle"
-                android:layout_width="180dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Telefono"
+                android:textSize="14sp"
                 android:textColorHint="@android:color/black"
                 app:hintAnimationEnabled="false"
                 android:layout_marginBottom="5dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/telefono_miembro"
-                    android:layout_width="180dp"
+                    android:layout_width="165dp"
                     android:layout_height="wrap_content"
                     android:drawableTint="#000"
-                    android:drawablePadding="15dp"
+                    android:textSize="14sp"
+                    android:drawablePadding="5dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/black" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/LoginTextInputLayoutStyle"
-                android:layout_width="180dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Tel. de emergencia"
+                android:textSize="14sp"
                 android:textColorHint="@android:color/black"
                 app:hintAnimationEnabled="false"
                 android:layout_marginBottom="5dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/emergencia_miembro"
-                    android:layout_width="180dp"
+                    android:layout_width="165dp"
                     android:layout_height="wrap_content"
                     android:drawableTint="#000"
-                    android:drawablePadding="15dp"
+                    android:textSize="14sp"
+                    android:drawablePadding="5dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/black" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -279,6 +296,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Condicion fisica"
+                android:textSize="14sp"
                 android:textColorHint="@android:color/black"
                 app:hintAnimationEnabled="false"
                 android:layout_marginBottom="5dp">
@@ -288,6 +306,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableTint="#000"
+                    android:textSize="14sp"
                     android:drawablePadding="15dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/black" />
@@ -298,6 +317,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Correo"
+                android:textSize="14sp"
                 android:textColorHint="@android:color/black"
                 app:hintAnimationEnabled="false"
                 android:layout_marginBottom="5dp">
@@ -307,6 +327,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableTint="#000"
+                    android:textSize="14sp"
                     android:drawablePadding="15dp"
                     android:inputType="textEmailAddress"
                     android:textColor="@android:color/black"
@@ -321,9 +342,10 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/LoginTextInputLayoutStyle"
-                android:layout_width="120dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Meses"
+                android:textSize="14sp"
                 android:textColorHint="@android:color/black"
                 app:hintAnimationEnabled="false"
                 android:layout_marginBottom="5dp">
@@ -333,6 +355,7 @@
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:drawableTint="#000"
+                    android:textSize="14sp"
                     android:drawablePadding="15dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/black" />
@@ -340,9 +363,10 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/LoginTextInputLayoutStyle"
-                android:layout_width="120dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Monto"
+                android:textSize="14sp"
                 android:textColorHint="@android:color/black"
                 app:hintAnimationEnabled="false"
                 android:layout_marginBottom="5dp">
@@ -352,6 +376,7 @@
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:drawableTint="#000"
+                    android:textSize="14sp"
                     android:drawablePadding="15dp"
                     android:textColor="@android:color/black"
                     android:textColorHint="@android:color/black" />
